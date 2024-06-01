@@ -20,22 +20,22 @@ export class UserController {
   }
 
   @Get('/:id')
-  findOne(@Param('id') id: string): User {
-    return this.userService.findOne(id);
+  async findOne(@Param('id') id: string): Promise<User> {
+    return await this.userService.findOne(id);
   }
 
   @Post()
-  createUser(@Body() user: User) {
-    return this.userService.create(user);
+  async createUser(@Body() user: User) {
+    return await this.userService.create(user);
   }
 
   @Put('/:id')
-  updateUser(@Param('id') id: string, @Body() user: UpdateUser) {
-    return this.userService.update(id, user);
+  async updateUser(@Param('id') id: string, @Body() user: UpdateUser) {
+    return await this.userService.update(id, user);
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string) {
-    return this.userService.delete(id);
+    return await this.userService.delete(id);
   }
 }

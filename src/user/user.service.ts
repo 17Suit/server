@@ -40,13 +40,14 @@ export class UserService {
 
   async findOne(userId: string): Promise<User> {
     try {
-      const user = e
+      const user = await e
         .select(e.User, () => ({
           filter_single: { id: userId },
           id: true,
           username: true,
           email: true,
           birthday: true,
+          password: false,
           rol: {
             id: false,
             name: true,
@@ -67,7 +68,7 @@ export class UserService {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
 
-      return user;
+      return user[0];
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;
@@ -87,7 +88,9 @@ export class UserService {
           email: user.email,
           password: user.password,
           birthday: user.birthday,
-          rol: e.select(e.Rol, { filter_single: { name: user.rol.name } }),
+          rol: e.select(e.Rol, () => ({
+            filter_single: { name: user.rol.name },
+          }))[0],
         })
         .run(this.client);
 
@@ -96,7 +99,7 @@ export class UserService {
       if (error.message.includes('constraint')) {
         throw new HttpException(
           'Username name must be unique',
-          HttpStatus.NOT_ACCEPTABLE,
+          HttpStatus.BAD_REQUEST,
         );
       }
       throw error;
@@ -112,7 +115,9 @@ export class UserService {
           password: updateUserDto.password,
           birthday: updateUserDto.birthday,
           rol: updateUserDto.rol
-            ? e.select(e.Rol, { filter_single: { name: user.rol.name } })
+            ? e.select(e.Rol, () => ({
+                filter_single: { name: user.rol.name },
+              }))[0]
             : undefined,
         },
       }))
@@ -123,7 +128,7 @@ export class UserService {
     return await userToUpdate;
   }
   async delete(userId: string): Promise<any> {
-    const query = e.delete(e.User, (user) => ({
+    const query = e.delete(e.User, () => ({
       filter_single: { id: userId },
     }));
     return await query.run(this.client);
