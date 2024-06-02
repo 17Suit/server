@@ -12,17 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      edgedb:
-        image: edgedb/edgedb
-        ports:
-          - 5656:5656
-        options: >-
-          --health-cmd "edgedb-cli server status"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 3
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -35,9 +24,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set up EdgeDB CLI
+        run: npm install -g edgedb-cli
+
+      - name: Generate EdgeDB client
+        run: npx @edgedb/generate edgeql-js
+
       - name: Run tests
         env:
-          DATABASE_URL: postgres://edgedb:edgedb@localhost:5656/edgedb
+          EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
+          EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
         run: npm run test
 
       - name: Build project
