@@ -1,5 +1,21 @@
 module default {
 
+  type Permissions {
+    required read -> bool;  
+    required write -> bool;
+    required `create` -> bool;
+    required `update` -> bool;
+    required `delete` -> bool;
+  }
+  type Rol {
+    required property name -> str {
+      constraint exclusive;
+    }
+    required description -> str;
+    permissions -> Permissions;
+  }
+
+
   
 
   type User {
@@ -13,22 +29,6 @@ module default {
     multi plans -> Plan;
   }  
 
-  type Rol {
-    required property name -> str {
-      constraint exclusive;
-    }
-    required description -> str;
-    permissions -> Permissions;
-  }
-
-  type Permissions {
-    required read -> bool;  
-    required write -> bool;
-    required `create` -> bool;
-    required `update` -> bool;
-    required `delete` -> bool;
-
-  }
 
   type Status {
     required name -> str;
