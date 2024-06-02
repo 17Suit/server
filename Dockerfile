@@ -16,6 +16,9 @@ COPY edgedb.toml ./
 # Copia el resto del código de la aplicación
 COPY . .
 
+# Genera el esquema de EdgeDB
+RUN npx @edgedb/generate edgeql-js
+
 # Construye la aplicación NestJS
 RUN npm run build
 
