@@ -10,11 +10,14 @@ COPY package*.json ./
 # Instala las dependencias del proyecto
 RUN npm install
 
+# Copia el archivo edgedb.toml
+COPY edgedb.toml ./
+
 # Copia el resto del código de la aplicación
 COPY . .
 
 # Construye la aplicación NestJS
-RUN npm run build
+RUN npx @edgedb/generate edgeql-js && npm run build
 
 # Expone el puerto que usará la aplicación
 EXPOSE 3000

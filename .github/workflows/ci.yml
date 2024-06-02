@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      edgedb:
+        image: edgedb/edgedb
+        ports:
+          - 5656:5656
+        options: >-
+          --health-cmd "edgedb-cli server status"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        env:
+          DATABASE_URL: postgres://edgedb:edgedb@localhost:5656/edgedb
+        run: npm run test
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to Railway
+        uses: railwayapp/railway-action@v1
+        with:
+          railway_token: ${{ secrets.RAILWAY_TOKEN }}
+          environment: production
