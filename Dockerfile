@@ -17,7 +17,7 @@ COPY edgedb.toml ./
 COPY . .
 
 # Construye la aplicación NestJS
-RUN npx @edgedb/generate edgeql-js && npm run build
+RUN npm run build
 
 # Expone el puerto que usará la aplicación
 EXPOSE 3000

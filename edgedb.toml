@@ -1,7 +1,2 @@
 [edgedb]
 server-version = "5.4"
-[databases]
-default = "server"
-
-[credentials]
-dsn = "edgedb://user:password@hostname:port/server"
