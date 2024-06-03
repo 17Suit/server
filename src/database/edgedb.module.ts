@@ -13,8 +13,8 @@ import { createClient } from 'edgedb';
             configService.get<string>('EDGEDB_INSTANCE') ||
             process.env.EDGEDB_INSTANCE,
           secretKey:
-            configService.get<string>('EDGEDB_SECTREC_KEY') ||
-            process.env.EDGEDB_SECTREC,
+            configService.get<string>('EDGEDB_SECRET_KEY') ||
+            process.env.EDGEDB_SECRET_KEY,
         });
       },
       inject: [ConfigService],
