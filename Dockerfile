@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 
-RUN npx edgedb migration create
+RUN npx edgedb
 
 RUN source "/root/.config/edgedb/env"
 
