@@ -1,4 +1,0 @@
-[edgedb]
-server-version = "5.4"
-[project]
-schema-dir = "dbschema/edgeql-j"
