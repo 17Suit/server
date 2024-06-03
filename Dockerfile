@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 
-RUN npx edgedb
+RUN npx edgedb -I 3FE3LE/seventeen-suit-db
 
 RUN source "/root/.config/edgedb/env"
 
