@@ -9,8 +9,7 @@ import { createClient } from 'edgedb';
       provide: 'EDGEDB_CLIENT',
       useFactory: () => {
         return createClient({
-          instanceName:
-            process.env.EDGEDB_INSTANCE || '3FE3LE/seventeen-suit-db',
+          instanceName: process.env.EDGEDB_INSTANCE,
           secretKey: process.env.EDGEDB_SECRET_KEY,
         });
       },
