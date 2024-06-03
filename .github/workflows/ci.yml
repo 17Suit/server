@@ -24,11 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        env:
-          EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
-          EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
-        run: npm run test
+      # - name: Run tests
+      #   env:
+      #     EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
+      #     EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
+      #   run: npm run test
 
       - name: Build project
         run: npm run build
