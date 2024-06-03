@@ -15,7 +15,7 @@ export type $ActivityλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f738
 type $Activity = $.ObjectType<"default::Activity", $ActivityλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $Activity = $.makeType<$Activity>(_.spec, "6259fefd-20f7-11ef-a9e2-472614f3c809", _.syntax.literal);
+const $Activity = $.makeType<$Activity>(_.spec, "8d04467e-1d53-11ef-8a42-a7be956467d7", _.syntax.literal);
 
 const Activity: $.$expr_PathNode<$.TypeSet<$Activity, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Activity, $.Cardinality.Many), null);
 
@@ -30,7 +30,7 @@ export type $BudgetλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840
 type $Budget = $.ObjectType<"default::Budget", $BudgetλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $Budget = $.makeType<$Budget>(_.spec, "625caa17-20f7-11ef-b857-3d5ff038c233", _.syntax.literal);
+const $Budget = $.makeType<$Budget>(_.spec, "8d07f95f-1d53-11ef-a11d-b73a22b308e3", _.syntax.literal);
 
 const Budget: $.$expr_PathNode<$.TypeSet<$Budget, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Budget, $.Cardinality.Many), null);
 
@@ -47,7 +47,7 @@ export type $CityλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840c2
 type $City = $.ObjectType<"default::City", $CityλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $City = $.makeType<$City>(_.spec, "626245c3-20f7-11ef-8c51-61b09afa4684", _.syntax.literal);
+const $City = $.makeType<$City>(_.spec, "8d0f4ccc-1d53-11ef-b180-c1e42d02a1ed", _.syntax.literal);
 
 const City: $.$expr_PathNode<$.TypeSet<$City, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($City, $.Cardinality.Many), null);
 
@@ -59,7 +59,7 @@ export type $ContinentλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73
 type $Continent = $.ObjectType<"default::Continent", $ContinentλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $Continent = $.makeType<$Continent>(_.spec, "625e3ad5-20f7-11ef-928c-d32da0dd1330", _.syntax.literal);
+const $Continent = $.makeType<$Continent>(_.spec, "8d0a0fc3-1d53-11ef-8cc2-cdb145e9816e", _.syntax.literal);
 
 const Continent: $.$expr_PathNode<$.TypeSet<$Continent, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Continent, $.Cardinality.Many), null);
 
@@ -75,7 +75,7 @@ export type $CountryλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f7384
 type $Country = $.ObjectType<"default::Country", $CountryλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $Country = $.makeType<$Country>(_.spec, "625f57e3-20f7-11ef-8af1-5b003a82fe02", _.syntax.literal);
+const $Country = $.makeType<$Country>(_.spec, "8d0b9a65-1d53-11ef-b107-4d2d249e1948", _.syntax.literal);
 
 const Country: $.$expr_PathNode<$.TypeSet<$Country, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Country, $.Cardinality.Many), null);
 
@@ -88,7 +88,7 @@ export type $CurrencyλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f738
 type $Currency = $.ObjectType<"default::Currency", $CurrencyλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $Currency = $.makeType<$Currency>(_.spec, "625b7bb0-20f7-11ef-9001-8bd89498fd8d", _.syntax.literal);
+const $Currency = $.makeType<$Currency>(_.spec, "8d0675ea-1d53-11ef-8bda-7b3a90a64d70", _.syntax.literal);
 
 const Currency: $.$expr_PathNode<$.TypeSet<$Currency, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Currency, $.Cardinality.Many), null);
 
@@ -108,7 +108,7 @@ export type $DestinationλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f
 type $Destination = $.ObjectType<"default::Destination", $DestinationλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $Destination = $.makeType<$Destination>(_.spec, "6264125c-20f7-11ef-9079-ad9748269c62", _.syntax.literal);
+const $Destination = $.makeType<$Destination>(_.spec, "8d1180b2-1d53-11ef-9278-eb88a621fa88", _.syntax.literal);
 
 const Destination: $.$expr_PathNode<$.TypeSet<$Destination, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Destination, $.Cardinality.Many), null);
 
@@ -124,7 +124,7 @@ export type $PermissionsλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f
 type $Permissions = $.ObjectType<"default::Permissions", $PermissionsλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $Permissions = $.makeType<$Permissions>(_.spec, "6269fb88-20f7-11ef-ac38-b74d1b4e17fc", _.syntax.literal);
+const $Permissions = $.makeType<$Permissions>(_.spec, "8d1985bb-1d53-11ef-a65a-dbffb36f9345", _.syntax.literal);
 
 const Permissions: $.$expr_PathNode<$.TypeSet<$Permissions, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Permissions, $.Cardinality.Many), null);
 
@@ -146,14 +146,14 @@ export type $PlanλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840c2
 type $Plan = $.ObjectType<"default::Plan", $PlanλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $Plan = $.makeType<$Plan>(_.spec, "62678ce0-20f7-11ef-9300-b71139ab8442", _.syntax.literal);
+const $Plan = $.makeType<$Plan>(_.spec, "8d167723-1d53-11ef-8ced-e905a08ba984", _.syntax.literal);
 
 const Plan: $.$expr_PathNode<$.TypeSet<$Plan, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Plan, $.Cardinality.Many), null);
 
 export type $RolλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588λShape & {
   "description": $.PropertyDesc<_std.$str, $.Cardinality.One, false, false, false, false>;
   "name": $.PropertyDesc<_std.$str, $.Cardinality.One, true, false, false, false>;
-  "permissions": $.LinkDesc<$Permissions, $.Cardinality.AtMostOne, {}, false, false,  false, false>;
+  "permissions": $.LinkDesc<$Permissions, $.Cardinality.One, {}, false, false,  false, false>;
   "<rol[is User]": $.LinkDesc<$User, $.Cardinality.Many, {}, false, false,  false, false>;
   "<rol": $.LinkDesc<$.ObjectType, $.Cardinality.Many, {}, false, false,  false, false>;
 }>;
@@ -161,7 +161,7 @@ type $Rol = $.ObjectType<"default::Rol", $RolλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
   {name: {__element__: _std.$str, __cardinality__: $.Cardinality.One | $.Cardinality.AtMostOne },},
 ]>;
-const $Rol = $.makeType<$Rol>(_.spec, "626b5e9e-20f7-11ef-9179-9fc01daf802d", _.syntax.literal);
+const $Rol = $.makeType<$Rol>(_.spec, "8d1b5979-1d53-11ef-8eec-f18b9ed37e21", _.syntax.literal);
 
 const Rol: $.$expr_PathNode<$.TypeSet<$Rol, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Rol, $.Cardinality.Many), null);
 
@@ -176,7 +176,7 @@ export type $StateλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840c
 type $State = $.ObjectType<"default::State", $StateλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $State = $.makeType<$State>(_.spec, "6260c16d-20f7-11ef-92ae-5309131510f2", _.syntax.literal);
+const $State = $.makeType<$State>(_.spec, "8d0d728e-1d53-11ef-a4c5-a9fe45f7f7ad", _.syntax.literal);
 
 const State: $.$expr_PathNode<$.TypeSet<$State, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($State, $.Cardinality.Many), null);
 
@@ -189,7 +189,7 @@ export type $StatusλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840
 type $Status = $.ObjectType<"default::Status", $StatusλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
 ]>;
-const $Status = $.makeType<$Status>(_.spec, "62665a9b-20f7-11ef-8cef-8bbf3b052433", _.syntax.literal);
+const $Status = $.makeType<$Status>(_.spec, "8d14e6e9-1d53-11ef-8b69-8bfbb53bc9fe", _.syntax.literal);
 
 const Status: $.$expr_PathNode<$.TypeSet<$Status, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Status, $.Cardinality.Many), null);
 
@@ -209,7 +209,7 @@ type $User = $.ObjectType<"default::User", $UserλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
   {username: {__element__: _std.$str, __cardinality__: $.Cardinality.One | $.Cardinality.AtMostOne },},
 ]>;
-const $User = $.makeType<$User>(_.spec, "626cc875-20f7-11ef-8121-2f30939f4981", _.syntax.literal);
+const $User = $.makeType<$User>(_.spec, "8d1d488a-1d53-11ef-8f22-ddd33923b706", _.syntax.literal);
 
 const User: $.$expr_PathNode<$.TypeSet<$User, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($User, $.Cardinality.Many), null);
 

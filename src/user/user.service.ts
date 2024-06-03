@@ -39,7 +39,7 @@ export class UserService {
     }
   }
 
-  async findOne(userId: string): Promise<User> {
+  async findOne(userId: string): Promise<User[]> {
     try {
       const user = await e
         .select(e.User, () => ({
@@ -69,7 +69,7 @@ export class UserService {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
 
-      return user[0];
+      return user;
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;
@@ -83,15 +83,24 @@ export class UserService {
 
   async create(user: User): Promise<any> {
     try {
+      const role = await e
+        .select(e.Rol, () => ({
+          filter_single: { name: user.rol.name },
+          id: true,
+          name: true,
+          description: true,
+          permissions: true,
+        }))
+        .run(this.client);
+
+      console.log(role);
+
       const result = await e
         .insert(e.User, {
           username: user.username,
           email: user.email,
           password: user.password,
           birthday: user.birthday,
-          rol: e.select(e.Rol, () => ({
-            filter_single: { name: user.rol.name },
-          }))[0],
         })
         .run(this.client);
 
@@ -118,6 +127,10 @@ export class UserService {
           rol: updateUserDto.rol
             ? e.select(e.Rol, () => ({
                 filter_single: { name: user.rol.name },
+                id: true,
+                name: true,
+                description: true,
+                permissions: true,
               }))[0]
             : undefined,
         },

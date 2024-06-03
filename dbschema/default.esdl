@@ -12,7 +12,7 @@ module default {
       constraint exclusive;
     }
     required description -> str;
-    permissions -> Permissions;
+    required permissions -> Permissions;
   }
 
 
