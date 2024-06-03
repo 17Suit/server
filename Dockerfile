@@ -13,7 +13,13 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
-RUN npm run generate
+RUN npx edgedb instance list
+
+RUN npx edgedb instance credentiasl
+
+RUN npx edgedb instance status
+
+RUN npx edgedb instance link
 
 # Construye la aplicación NestJS
 RUN npm run build
