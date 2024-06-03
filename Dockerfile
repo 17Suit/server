@@ -2,7 +2,7 @@
 FROM node:20-alpine
 
 # Establece el directorio de trabajo
-WORKDIR /
+WORKDIR /src
 
 # Copia el archivo package.json y package-lock.json
 COPY package*.json ./
