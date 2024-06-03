@@ -13,15 +13,6 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
-
-RUN npx edgedb -I 3FE3LE/seventeen-suit-db
-
-RUN source "/root/.config/edgedb/env"
-
-RUN npx edgedb migrate -I 3FE3LE/seventeen-suit-db
-
-RUN npx @edgedb/generate edgeql-js
-
 # Construye la aplicación NestJS
 RUN npm run build
 
