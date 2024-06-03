@@ -33,8 +33,8 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy to Railway
-        uses: railwayapp/railway-action@v1
-        with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
-          environment: production
+      # - name: Deploy to Railway
+      #   uses: railwayapp/railway-action@v1
+      #   with:
+      #     railway_token: ${{ secrets.RAILWAY_TOKEN }}
+      #     environment: production
