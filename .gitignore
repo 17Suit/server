@@ -3,6 +3,7 @@
 /node_modules
 /build
 .vscode
+
 # Logs
 logs
 *.log
@@ -51,9 +52,7 @@ pids
 *.pid
 *.seed
 *.pid.lock
-*.toml
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .vercel
-
