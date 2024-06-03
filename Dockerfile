@@ -2,7 +2,7 @@
 FROM node:20-alpine
 
 # Establece el directorio de trabajo
-WORKDIR /src
+WORKDIR /app
 
 # Copia el archivo package.json y package-lock.json
 COPY package*.json ./
@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copia el resto del código de la aplicación
-COPY . .
+COPY . ./
 
 # Construye la aplicación NestJS
 RUN npm run build
