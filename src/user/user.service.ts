@@ -34,6 +34,7 @@ export class UserService {
         .run(this.client);
       return query;
     } catch (error) {
+      console.log(error.message);
       throw new HttpException('BAD_REQUEST', HttpStatus.BAD_REQUEST);
     }
   }
