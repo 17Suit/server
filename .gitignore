@@ -3,7 +3,7 @@
 /node_modules
 /build
 .vscode
-edgedb.tolm
+edgedb.toml
 
 # Logs
 logs
