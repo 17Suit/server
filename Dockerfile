@@ -13,7 +13,10 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
-RUN npx edgedb project init --yes
+
+RUN npx edgedb migration create
+
+RUN npx edgedb migrate -I 3FE3LE/seventeen-suit-db
 
 RUN npx @edgedb/generate edgeql-js
 
