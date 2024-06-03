@@ -13,7 +13,7 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
-RUN edgedb project init --yes
+RUN npx edgedb project init --yes
 
 RUN npx @edgedb/generate edgeql-js
 
