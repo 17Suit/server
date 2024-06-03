@@ -16,6 +16,8 @@ COPY . .
 
 RUN npx edgedb migration create
 
+RUN source "/root/.config/edgedb/env"
+
 RUN npx edgedb migrate -I 3FE3LE/seventeen-suit-db
 
 RUN npx @edgedb/generate edgeql-js
