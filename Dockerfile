@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copia el resto del código de la aplicación
-COPY . ./src
+COPY . .
 
 RUN npx @edgedb/generate edgeql-js
 
