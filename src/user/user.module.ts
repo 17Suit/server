@@ -2,11 +2,11 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { LoggerMiddleware } from './logger/logger.middleware';
-import { DatabaseModule } from '../database/database.module';
 import { AuthMiddleware } from '../auth/auth.middleware';
+import { EdgeDbModule } from 'src/database/edgedb.module';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [EdgeDbModule],
   controllers: [UserController],
   providers: [UserService],
 })

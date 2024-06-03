@@ -17,13 +17,13 @@ RUN npx edgedb
 
 RUN source "/root/.config/edgedb/env"
 
-RUN project init --server-instance 3FE3LE/seventeen-suit-db
+RUN edgedb project init -I 3FE3LE/seventeen-suit-db
 
-RUN npx edgedb instance credentiasl
+RUN edgedb instance credentiasl
 
-RUN npx edgedb instance status
+RUN edgedb instance status
 
-RUN npx edgedb instance link
+RUN edgedb instance link
 
 # Construye la aplicación NestJS
 RUN npm run build

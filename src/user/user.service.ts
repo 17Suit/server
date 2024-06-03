@@ -8,11 +8,11 @@ import {
 import { User } from './dto/create-user.dto';
 import { UpdateUser } from './dto/update-user.dto';
 import { Client } from 'edgedb';
-import e from '../database/edgedb-schema';
+import { e } from 'src/database/edgedb.module';
 
 @Injectable()
 export class UserService {
-  constructor(@Inject('DATABASE_CLIENT') private readonly client: Client) {}
+  constructor(@Inject('EDGEDB_CLIENT') private readonly client: Client) {}
 
   private readonly users: User[] = [];
 
@@ -86,6 +86,7 @@ export class UserService {
       const role = await e
         .select(e.Rol, () => ({
           filter_single: { name: user.rol.name },
+          limit: 1,
           id: true,
           name: true,
           description: true,
