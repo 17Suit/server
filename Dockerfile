@@ -13,7 +13,7 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
-COPY dbschema/edgeql-js /dbschema/edgeql-js
+RUN npx @edgedb/generate edgeql-js
 
 # Construye la aplicación NestJS
 RUN npm run build
