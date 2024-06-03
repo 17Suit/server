@@ -13,7 +13,7 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
-RUN npx edgedb instance list
+RUN npx edgedb project init \ --server-instance 3FE3LE/seventeen-suit-db
 
 RUN npx edgedb instance credentiasl
 
