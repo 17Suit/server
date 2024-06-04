@@ -3,14 +3,27 @@ import {
   IsEmail,
   IsEmpty,
   IsNotEmpty,
-  IsNumber,
   IsString,
 } from 'class-validator';
-import { Rol } from './create-user.dto';
 import { Type } from 'class-transformer';
-import { Plan } from 'src/plan/entities/plan.entity';
+import { Plan } from 'src/opt/plan/entities/plan.entity';
 
-export class UpdateUser {
+export class Rol {
+  @IsString()
+  name: string;
+  @IsString()
+  description: string;
+  permissions: Permissions;
+}
+
+class Permissions {
+  read: boolean;
+  write: boolean;
+  create: boolean;
+  delete: boolean;
+  update: boolean;
+}
+export class User {
   @IsEmpty()
   id: string;
   @IsString()
@@ -27,18 +40,4 @@ export class UpdateUser {
   @IsNotEmpty()
   rol: Rol;
   plans?: Plan[];
-}
-export class UserProfile {
-  @IsNumber()
-  id: number;
-  @IsNumber()
-  userId: number;
-  @IsString()
-  firstName: string;
-  @IsString()
-  lastName: string;
-  @IsString()
-  bio?: string;
-  @IsString()
-  avatarUrl?: string;
 }

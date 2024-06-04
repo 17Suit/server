@@ -1,4 +1,4 @@
-import { Group } from 'src/group/entities/group.entity';
+import { Group } from 'src/opt/group/entities/group.entity';
 
 export class Plan {
   id: number;

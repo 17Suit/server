@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { LoggerMiddleware } from './logger/logger.middleware';
-import { AuthMiddleware } from '../auth/auth.middleware';
+import { AuthMiddleware } from 'src/auth/auth.middleware';
 import { EdgeDbModule } from 'src/database/edgedb.module';
 
 @Module({
