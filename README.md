@@ -1,73 +1,65 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="http://17suit.com/" target="blank"><img src="https://happy-wizard-8e8.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6d2d1032-2d0f-4236-af89-55db08f4be63%2Ficon-17suit3x.png?table=block&id=0ee88ee3-b023-45c4-9ef4-f6f2114a2697&spaceId=932f33f6-b4d4-4dd6-97b1-9c1feaa62f67&width=2000&userId=&cache=v2" width="200" alt="17s-logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Seventeen Suit server
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Descripción corta o resumen del proyecto.
 
-## Description
+## Tabla de Contenidos
+- [Seventeen Suit server](#seventeen-suit-server)
+  - [Tabla de Contenidos](#tabla-de-contenidos)
+  - [Instalación](#instalación)
+  - [Uso](#uso)
+  - [Estructura del Proyecto](#estructura-del-proyecto)
+  - [Documentación](#documentación)
+  - [Contribución](#contribución)
+  - [Licencia](#licencia)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Instalación
 
-## Installation
+1. Clona el repositorio:
 
 ```bash
-$ npm install
+git clone git@github.com:17Suit/server.git
 ```
 
-## Running the app
+2. Instala las dependencias:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Test
+## Uso
 
+- build command
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run build
 ```
 
-## Support
+- build command
+```bash
+npm run start:dev
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Estructura del Proyecto
 
-## Stay in touch
+Breve descripción de la estructura del proyecto y cómo están organizados los archivos y carpetas.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Documentación
 
-## License
+- [Enlace a la documentación de la API](#) - Proporciona enlaces a la documentación de la API si está disponible.
 
-Nest is [MIT licensed](LICENSE).
+## Contribución
+
+Si deseas contribuir al proyecto, sigue estos pasos:
+
+1. Realiza un fork del repositorio.
+2. Crea una rama para tu función: `git checkout -b feature/NombreDeLaFuncion`.
+3. Realiza tus cambios y haz commits: `git commit -am 'Añade una nueva función'`.
+4. Sube tus cambios a tu repositorio fork: `git push origin feature/NombreDeLaFuncion`.
+5. Envía un pull request a la rama `master` del repositorio original.
+
+## Licencia
+
+Indica la licencia bajo la cual se distribuye tu proyecto.
