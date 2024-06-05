@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as dotenv from 'dotenv';
 import { Logger } from '@nestjs/common';
 import { SuiteModule } from './suite/suite.module';
 import { OptModule } from './opt/opt.module';
@@ -9,7 +8,6 @@ import { PlanModule } from './opt/plan/plan.module';
 import { GroupModule } from './opt/group/group.module';
 
 async function bootstrap() {
-  dotenv.config({});
   const app = await NestFactory.create(AppModule);
   // Swagger configuration to all modules
   const appConfig = new DocumentBuilder()
