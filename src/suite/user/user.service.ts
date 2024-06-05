@@ -9,7 +9,6 @@ import { User } from './dto/create-user.dto';
 import { UpdateUser } from './dto/update-user.dto';
 import { Client } from 'edgedb';
 import { e } from 'src/database/edgedb.module';
-
 @Injectable()
 export class UserService {
   constructor(@Inject('EDGEDB_CLIENT') private readonly client: Client) {}
@@ -32,6 +31,7 @@ export class UserService {
           },
         }))
         .run(this.client);
+      console.log(query);
       return query;
     } catch (error) {
       console.log(error.message);
@@ -83,28 +83,20 @@ export class UserService {
 
   async create(user: User): Promise<any> {
     try {
-      const role = await e
-        .select(e.Rol, () => ({
-          filter_single: { name: user.rol.name },
-          limit: 1,
-          id: true,
-          name: true,
-          description: true,
-          permissions: true,
-        }))
-        .run(this.client);
-
-      console.log(role);
-
       const result = await e
         .insert(e.User, {
           username: user.username,
           email: user.email,
           password: user.password,
           birthday: user.birthday,
+          rol: e.assert_single(
+            e.select(e.Rol, (rol) => ({
+              filter: e.op(rol.name, '=', user.rol.name),
+            })),
+          ),
         })
         .run(this.client);
-
+      console.log(result);
       return result;
     } catch (error) {
       if (error.message.includes('constraint')) {
