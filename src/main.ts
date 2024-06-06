@@ -6,6 +6,7 @@ import { SuiteModule } from './suite/suite.module';
 import { OptModule } from './opt/opt.module';
 import { PlanModule } from './opt/plan/plan.module';
 import { GroupModule } from './opt/group/group.module';
+import { UsersModule } from './suite/user/user.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -26,7 +27,7 @@ async function bootstrap() {
     .addTag('Suite')
     .build();
   const suiteDocument = SwaggerModule.createDocument(app, suiteConfig, {
-    include: [SuiteModule],
+    include: [SuiteModule, UsersModule],
   });
   SwaggerModule.setup('suite/api', app, suiteDocument);
 

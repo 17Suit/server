@@ -7,6 +7,7 @@ module default {
     required `update` -> bool;
     required `delete` -> bool;
   }
+
   type Rol {
     required property name -> str {
       constraint exclusive;
@@ -15,20 +16,16 @@ module default {
     required permissions -> Permissions;
   }
 
-
-  
-
   type User {
     required username -> str {
       constraint exclusive;
-    };
+    }
     required email -> str;
     required password -> str;
     birthday -> datetime;
     required rol -> Rol;
     multi plans -> Plan;
   }  
-
 
   type Status {
     required name -> str;
@@ -104,5 +101,21 @@ module default {
     required created_at -> datetime;
     startTime -> datetime;
     endTime -> datetime;
+    required priority -> Priority;
+    multi participants -> User;
+  }
+
+  enum Priority {
+    Low;
+    Medium;
+    High;
+  }
+
+  type Group {
+    required name -> str;
+    required description -> str;
+    required created_at -> datetime;
+    required creator -> User;
+    multi members -> User;
   }
 }
