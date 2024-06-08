@@ -8,6 +8,7 @@ import type * as _sys from "./modules/sys";
 import type * as _stdenc from "./modules/std/enc";
 import type * as _schema from "./modules/schema";
 import type * as _fts from "./modules/fts";
+import type * as _default from "./modules/default";
 import type * as _cfg from "./modules/cfg";
 import type * as _cal from "./modules/cal";
 export type scalarAssignableBy<T extends $.ScalarType> =
@@ -15,7 +16,6 @@ export type scalarAssignableBy<T extends $.ScalarType> =
   T extends _sys.$VersionStage ? _sys.$VersionStage : 
   T extends _sys.$TransactionIsolation ? _sys.$TransactionIsolation : 
   T extends _std.$uuid ? _std.$uuid : 
-  T extends _std.$str ? _std.$str : 
   T extends _std.$json ? _std.$json : 
   T extends _std.$int64 ? _std.$int64 : 
   T extends _std.$int32 ? _std.$int32 : 
@@ -51,6 +51,8 @@ export type scalarAssignableBy<T extends $.ScalarType> =
   T extends _fts.$LuceneLanguage ? _fts.$LuceneLanguage : 
   T extends _fts.$Language ? _fts.$Language : 
   T extends _fts.$ElasticLanguage ? _fts.$ElasticLanguage : 
+  T extends _default.$Priority ? _default.$Priority : 
+  T extends _std.$str ? _std.$str : 
   T extends _cfg.$memory ? _cfg.$memory : 
   T extends _cfg.$QueryCacheMode ? _cfg.$QueryCacheMode : 
   T extends _cfg.$ConnectionTransport ? _cfg.$ConnectionTransport : 
@@ -67,7 +69,6 @@ export type scalarCastableFrom<T extends $.ScalarType> =
   T extends _sys.$VersionStage ? _sys.$VersionStage : 
   T extends _sys.$TransactionIsolation ? _sys.$TransactionIsolation : 
   T extends _std.$uuid ? _std.$uuid : 
-  T extends _std.$str ? _std.$str : 
   T extends _std.$json ? _std.$json : 
   T extends _std.$int64 ? _std.$int64 : 
   T extends _std.$int32 ? _std.$int32 : 
@@ -103,6 +104,8 @@ export type scalarCastableFrom<T extends $.ScalarType> =
   T extends _fts.$LuceneLanguage ? _fts.$LuceneLanguage : 
   T extends _fts.$Language ? _fts.$Language : 
   T extends _fts.$ElasticLanguage ? _fts.$ElasticLanguage : 
+  T extends _default.$Priority ? _default.$Priority : 
+  T extends _std.$str ? _std.$str : 
   T extends _cfg.$memory ? _cfg.$memory : 
   T extends _cfg.$QueryCacheMode ? _cfg.$QueryCacheMode : 
   T extends _cfg.$ConnectionTransport ? _cfg.$ConnectionTransport : 
@@ -135,12 +138,6 @@ type getSharedParentScalar<A, B> =
   :
   A extends _std.$uuid ?
     B extends _std.$uuid ?
-    B
-    :
-    never
-  :
-  A extends _std.$str ?
-    B extends _std.$str ?
     B
     :
     never
@@ -361,6 +358,18 @@ type getSharedParentScalar<A, B> =
     :
     never
   :
+  A extends _default.$Priority ?
+    B extends _default.$Priority ?
+    B
+    :
+    never
+  :
+  A extends _std.$str ?
+    B extends _std.$str ?
+    B
+    :
+    never
+  :
   A extends _cfg.$memory ?
     B extends _cfg.$memory ?
     B
@@ -452,12 +461,6 @@ function getSharedParentScalar<A extends $.ScalarType, B extends $.ScalarType>(a
     }
   if (a.__name__ === "std::uuid") {
     if(b.__name__ === "std::uuid") {
-      return b;
-    }
-    throw new Error(`Types are not castable: ${a.__name__}, ${b.__name__}`);
-    }
-  if (a.__name__ === "std::str") {
-    if(b.__name__ === "std::str") {
       return b;
     }
     throw new Error(`Types are not castable: ${a.__name__}, ${b.__name__}`);
@@ -674,6 +677,18 @@ function getSharedParentScalar<A extends $.ScalarType, B extends $.ScalarType>(a
     }
   if (a.__name__ === "fts::ElasticLanguage") {
     if(b.__name__ === "fts::ElasticLanguage") {
+      return b;
+    }
+    throw new Error(`Types are not castable: ${a.__name__}, ${b.__name__}`);
+    }
+  if (a.__name__ === "default::Priority") {
+    if(b.__name__ === "default::Priority") {
+      return b;
+    }
+    throw new Error(`Types are not castable: ${a.__name__}, ${b.__name__}`);
+    }
+  if (a.__name__ === "std::str") {
+    if(b.__name__ === "std::str") {
       return b;
     }
     throw new Error(`Types are not castable: ${a.__name__}, ${b.__name__}`);

@@ -25,7 +25,7 @@ module default {
     birthday -> datetime;
     required rol -> Rol;
     multi plans -> Plan;
-  }  
+  }
 
   type Status {
     required name -> str;
@@ -95,6 +95,8 @@ module default {
     required created_at -> datetime;
   }
 
+  scalar type Priority extending str;
+
   type Activity {
     required name -> str;
     required description -> str;
@@ -105,13 +107,7 @@ module default {
     multi participants -> User;
   }
 
-  enum Priority {
-    Low;
-    Medium;
-    High;
-  }
-
-  type Group {
+  type PlanGroup {
     required name -> str;
     required description -> str;
     required created_at -> datetime;

@@ -3,12 +3,17 @@
 import * as $ from "../reflection";
 import * as _ from "../imports";
 import type * as _std from "./std";
+export type $Priority = $.ScalarType<"std::str", string>;
+const Priority: $.scalarTypeWithConstructor<_std.$str, never> = $.makeType<$.scalarTypeWithConstructor<_std.$str, never>>(_.spec, "26126b57-24d7-11ef-99cf-03130223b834", _.syntax.literal);
+
 export type $ActivityλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588λShape & {
   "created_at": $.PropertyDesc<_std.$datetime, $.Cardinality.One, false, false, false, false>;
   "description": $.PropertyDesc<_std.$str, $.Cardinality.One, false, false, false, false>;
   "endTime": $.PropertyDesc<_std.$datetime, $.Cardinality.AtMostOne, false, false, false, false>;
   "name": $.PropertyDesc<_std.$str, $.Cardinality.One, false, false, false, false>;
   "startTime": $.PropertyDesc<_std.$datetime, $.Cardinality.AtMostOne, false, false, false, false>;
+  "priority": $.PropertyDesc<$Priority, $.Cardinality.One, false, false, false, false>;
+  "participants": $.LinkDesc<$User, $.Cardinality.Many, {}, false, false,  false, false>;
   "<activities[is Plan]": $.LinkDesc<$Plan, $.Cardinality.Many, {}, false, false,  false, false>;
   "<activities": $.LinkDesc<$.ObjectType, $.Cardinality.Many, {}, false, false,  false, false>;
 }>;
@@ -150,6 +155,20 @@ const $Plan = $.makeType<$Plan>(_.spec, "0e85b476-21d7-11ef-8e00-3dc3cd53e380", 
 
 const Plan: $.$expr_PathNode<$.TypeSet<$Plan, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($Plan, $.Cardinality.Many), null);
 
+export type $PlanGroupλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588λShape & {
+  "created_at": $.PropertyDesc<_std.$datetime, $.Cardinality.One, false, false, false, false>;
+  "description": $.PropertyDesc<_std.$str, $.Cardinality.One, false, false, false, false>;
+  "name": $.PropertyDesc<_std.$str, $.Cardinality.One, false, false, false, false>;
+  "creator": $.LinkDesc<$User, $.Cardinality.One, {}, false, false,  false, false>;
+  "members": $.LinkDesc<$User, $.Cardinality.Many, {}, false, false,  false, false>;
+}>;
+type $PlanGroup = $.ObjectType<"default::PlanGroup", $PlanGroupλShape, null, [
+  ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
+]>;
+const $PlanGroup = $.makeType<$PlanGroup>(_.spec, "2612dc81-24d7-11ef-a14a-998df3d6a917", _.syntax.literal);
+
+const PlanGroup: $.$expr_PathNode<$.TypeSet<$PlanGroup, $.Cardinality.Many>, null> = _.syntax.$PathNode($.$toSet($PlanGroup, $.Cardinality.Many), null);
+
 export type $RolλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588λShape & {
   "description": $.PropertyDesc<_std.$str, $.Cardinality.One, false, false, false, false>;
   "name": $.PropertyDesc<_std.$str, $.Cardinality.One, true, false, false, false>;
@@ -202,8 +221,13 @@ export type $UserλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840c2
   "rol": $.LinkDesc<$Rol, $.Cardinality.One, {}, false, false,  false, false>;
   "<members[is Plan]": $.LinkDesc<$Plan, $.Cardinality.Many, {}, false, false,  false, false>;
   "<owner[is Plan]": $.LinkDesc<$Plan, $.Cardinality.Many, {}, false, false,  false, false>;
+  "<participants[is Activity]": $.LinkDesc<$Activity, $.Cardinality.Many, {}, false, false,  false, false>;
+  "<creator[is PlanGroup]": $.LinkDesc<$PlanGroup, $.Cardinality.Many, {}, false, false,  false, false>;
+  "<members[is PlanGroup]": $.LinkDesc<$PlanGroup, $.Cardinality.Many, {}, false, false,  false, false>;
+  "<creator": $.LinkDesc<$.ObjectType, $.Cardinality.Many, {}, false, false,  false, false>;
   "<members": $.LinkDesc<$.ObjectType, $.Cardinality.Many, {}, false, false,  false, false>;
   "<owner": $.LinkDesc<$.ObjectType, $.Cardinality.Many, {}, false, false,  false, false>;
+  "<participants": $.LinkDesc<$.ObjectType, $.Cardinality.Many, {}, false, false,  false, false>;
 }>;
 type $User = $.ObjectType<"default::User", $UserλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
@@ -215,9 +239,10 @@ const User: $.$expr_PathNode<$.TypeSet<$User, $.Cardinality.Many>, null> = _.syn
 
 
 
-export { $Activity, Activity, $Budget, Budget, $City, City, $Continent, Continent, $Country, Country, $Currency, Currency, $Destination, Destination, $Permissions, Permissions, $Plan, Plan, $Rol, Rol, $State, State, $Status, Status, $User, User };
+export { Priority, $Activity, Activity, $Budget, Budget, $City, City, $Continent, Continent, $Country, Country, $Currency, Currency, $Destination, Destination, $Permissions, Permissions, $Plan, Plan, $PlanGroup, PlanGroup, $Rol, Rol, $State, State, $Status, Status, $User, User };
 
 type __defaultExports = {
+  "Priority": typeof Priority;
   "Activity": typeof Activity;
   "Budget": typeof Budget;
   "City": typeof City;
@@ -227,12 +252,14 @@ type __defaultExports = {
   "Destination": typeof Destination;
   "Permissions": typeof Permissions;
   "Plan": typeof Plan;
+  "PlanGroup": typeof PlanGroup;
   "Rol": typeof Rol;
   "State": typeof State;
   "Status": typeof Status;
   "User": typeof User
 };
 const __defaultExports: __defaultExports = {
+  "Priority": Priority,
   "Activity": Activity,
   "Budget": Budget,
   "City": City,
@@ -242,6 +269,7 @@ const __defaultExports: __defaultExports = {
   "Destination": Destination,
   "Permissions": Permissions,
   "Plan": Plan,
+  "PlanGroup": PlanGroup,
   "Rol": Rol,
   "State": State,
   "Status": Status,
