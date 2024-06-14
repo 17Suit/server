@@ -1,7 +1,7 @@
 module default {
 
   type Permissions {
-    required read -> bool;  
+    required read -> bool;
     required write -> bool;
     required `create` -> bool;
     required `update` -> bool;
@@ -20,6 +20,9 @@ module default {
     required username -> str {
       constraint exclusive;
     }
+    required name -> str {
+      default:="";
+    };
     required email -> str;
     required password -> str;
     birthday -> datetime;
@@ -112,6 +115,7 @@ module default {
     required description -> str;
     required created_at -> datetime;
     required creator -> User;
+    multi plans -> Plan;
     multi members -> User;
   }
 }

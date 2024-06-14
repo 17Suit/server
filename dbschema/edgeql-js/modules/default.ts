@@ -146,6 +146,7 @@ export type $PlanλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840c2
   "members": $.LinkDesc<$User, $.Cardinality.Many, {}, false, false,  false, false>;
   "owner": $.LinkDesc<$User, $.Cardinality.One, {}, false, false,  false, false>;
   "<plans[is User]": $.LinkDesc<$User, $.Cardinality.Many, {}, false, false,  false, false>;
+  "<plans[is PlanGroup]": $.LinkDesc<$PlanGroup, $.Cardinality.Many, {}, false, false,  false, false>;
   "<plans": $.LinkDesc<$.ObjectType, $.Cardinality.Many, {}, false, false,  false, false>;
 }>;
 type $Plan = $.ObjectType<"default::Plan", $PlanλShape, null, [
@@ -161,6 +162,7 @@ export type $PlanGroupλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73
   "name": $.PropertyDesc<_std.$str, $.Cardinality.One, false, false, false, false>;
   "creator": $.LinkDesc<$User, $.Cardinality.One, {}, false, false,  false, false>;
   "members": $.LinkDesc<$User, $.Cardinality.Many, {}, false, false,  false, false>;
+  "plans": $.LinkDesc<$Plan, $.Cardinality.Many, {}, false, false,  false, false>;
 }>;
 type $PlanGroup = $.ObjectType<"default::PlanGroup", $PlanGroupλShape, null, [
   ..._std.$Object_8ce8c71ee4fa5f73840c22d7eaa58588['__exclusives__'],
@@ -217,6 +219,7 @@ export type $UserλShape = $.typeutil.flatten<_std.$Object_8ce8c71ee4fa5f73840c2
   "email": $.PropertyDesc<_std.$str, $.Cardinality.One, false, false, false, false>;
   "password": $.PropertyDesc<_std.$str, $.Cardinality.One, false, false, false, false>;
   "username": $.PropertyDesc<_std.$str, $.Cardinality.One, true, false, false, false>;
+  "name": $.PropertyDesc<_std.$str, $.Cardinality.One, false, false, false, true>;
   "plans": $.LinkDesc<$Plan, $.Cardinality.Many, {}, false, false,  false, false>;
   "rol": $.LinkDesc<$Rol, $.Cardinality.One, {}, false, false,  false, false>;
   "<members[is Plan]": $.LinkDesc<$Plan, $.Cardinality.Many, {}, false, false,  false, false>;
