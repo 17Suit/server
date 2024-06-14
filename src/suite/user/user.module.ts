@@ -9,6 +9,7 @@ import { EdgeDbModule } from 'src/database/edgedb.module';
   imports: [EdgeDbModule],
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
 })
 export class UsersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

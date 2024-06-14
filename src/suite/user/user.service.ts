@@ -19,16 +19,7 @@ export class UserService {
     try {
       const query = await e
         .select(e.User, () => ({
-          id: true,
-          username: true,
-          email: true,
-          password: false,
-          birthday: true,
-          rol: {
-            name: true,
-            description: false,
-            permissions: false,
-          },
+          ...e.User['*'],
         }))
         .run(this.client);
       console.log(query);
@@ -39,6 +30,20 @@ export class UserService {
     }
   }
 
+  async findOneByEmail(email: string) {
+    try {
+      const emailFound = await e
+        .assert_single(
+          e.select(e.User, (user) => ({
+            filter: e.op(user.email, '=', email),
+            ...e.User['*'],
+          })),
+        )
+        .run(this.client);
+      return emailFound;
+    } catch (error) {}
+  }
+
   async findOne(userId: string): Promise<User[]> {
     try {
       const user = await e
@@ -46,6 +51,7 @@ export class UserService {
           filter_single: { id: userId },
           id: true,
           username: true,
+          name: true,
           email: true,
           birthday: true,
           password: false,
@@ -82,16 +88,18 @@ export class UserService {
   }
 
   async create(user: User): Promise<any> {
+    const roleName = user.rol ? user.rol.name : 'user';
     try {
       const result = await e
         .insert(e.User, {
           username: user.username,
           email: user.email,
+          name: user.name,
           password: user.password,
           birthday: user.birthday,
           rol: e.assert_single(
             e.select(e.Rol, (rol) => ({
-              filter: e.op(rol.name, '=', user.rol.name),
+              filter: e.op(rol.name, '=', roleName),
             })),
           ),
         })
