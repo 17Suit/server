@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { SuiteModule } from './suite/suite.module';
 import { OptModule } from './opt/opt.module';
 import { PlanModule } from './opt/plan/plan.module';
@@ -42,6 +42,14 @@ async function bootstrap() {
     include: [OptModule, PlanModule, GroupModule],
   });
   SwaggerModule.setup('opt/api', app, optDocument);
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
 
   const globalPrefix = 'server';
   app.setGlobalPrefix(globalPrefix);
