@@ -28,6 +28,7 @@ module default {
     birthday -> datetime;
     required rol -> Rol;
     multi plans -> Plan;
+    multi groups -> PlanGroup
   }
 
   type Status {
