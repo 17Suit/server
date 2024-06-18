@@ -16,7 +16,7 @@ export class AuthController {
   @Get()
   @UseGuards(AuthGuard)
   getHello(): string {
-    return 'Hello World!';
+    return 'Hello World! yep, ur authorized crack';
   }
 
   constructor(private readonly authService: AuthService) {}

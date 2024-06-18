@@ -40,16 +40,23 @@ export class AuthService {
     const user = await this.usersService.findOneByEmail(email);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid email');
+      throw new UnauthorizedException('Invalid email or password+');
     }
 
     const isPasswordValid = await bcryptjs.compare(password, user.password);
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid password');
+      throw new UnauthorizedException('Invalid email or password-');
     }
 
+    const payload = {
+      email: user.email,
+    };
+
+    const token = await this.jwtService.signAsync(payload);
+
     return {
+      token,
       email: user.email,
     };
   }

@@ -3,7 +3,7 @@ import { GroupService } from './group.service';
 import { GroupController } from './group.controller';
 import { EdgeDbModule } from 'src/database/edgedb.module';
 import { LoggerMiddleware } from 'src/middleware/logger/logger.middleware';
-import { AuthMiddleware } from 'src/auth/auth.middleware';
+import { AuthMiddleware } from 'src/auth/middleware/auth.middleware';
 
 @Module({
   imports: [EdgeDbModule],
