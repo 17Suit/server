@@ -1,7 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-import { LoggerMiddleware } from 'src/middleware/logger/logger.middleware';
 import { AuthMiddleware } from 'src/auth/middleware/auth.middleware';
 import { EdgeDbModule } from 'src/database/edgedb.module';
 
@@ -13,10 +12,6 @@ import { EdgeDbModule } from 'src/database/edgedb.module';
 })
 export class UsersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes('users')
-      .apply(AuthMiddleware)
-      .forRoutes('users');
+    consumer.apply(AuthMiddleware).forRoutes('users');
   }
 }
