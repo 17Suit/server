@@ -1,12 +1,13 @@
 module default {
 
   type Permissions {
-    required read -> bool;  
+    required read -> bool;
     required write -> bool;
     required `create` -> bool;
     required `update` -> bool;
     required `delete` -> bool;
   }
+
   type Rol {
     required property name -> str {
       constraint exclusive;
@@ -15,20 +16,20 @@ module default {
     required permissions -> Permissions;
   }
 
-
-  
-
   type User {
     required username -> str {
       constraint exclusive;
+    }
+    required name -> str {
+      default:="";
     };
     required email -> str;
     required password -> str;
     birthday -> datetime;
     required rol -> Rol;
     multi plans -> Plan;
-  }  
-
+    multi groups -> PlanGroup
+  }
 
   type Status {
     required name -> str;
@@ -98,11 +99,24 @@ module default {
     required created_at -> datetime;
   }
 
+  scalar type Priority extending str;
+
   type Activity {
     required name -> str;
     required description -> str;
     required created_at -> datetime;
     startTime -> datetime;
     endTime -> datetime;
+    required priority -> Priority;
+    multi participants -> User;
+  }
+
+  type PlanGroup {
+    required name -> str;
+    required description -> str;
+    required created_at -> datetime;
+    required creator -> User;
+    multi plans -> Plan;
+    multi members -> User;
   }
 }

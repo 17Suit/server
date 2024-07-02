@@ -1,10 +1,4 @@
-import {
-  IsDate,
-  IsEmail,
-  IsEmpty,
-  IsNotEmpty,
-  IsString,
-} from 'class-validator';
+import { IsDate, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Plan } from 'src/opt/plan/entities/plan.entity';
 
@@ -24,10 +18,12 @@ class Permissions {
   update: boolean;
 }
 export class User {
-  @IsEmpty()
-  id: string;
   @IsString()
+  @IsNotEmpty()
   username: string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
   @IsEmail()
   @IsNotEmpty()
   email: string;
@@ -37,7 +33,6 @@ export class User {
   @IsDate()
   @Type(() => Date)
   birthday?: Date;
-  @IsNotEmpty()
-  rol: Rol;
+  rol?: Rol;
   plans?: Plan[];
 }

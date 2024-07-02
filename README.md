@@ -44,7 +44,63 @@ npm run start:dev
 
 ## Estructura del Proyecto
 
-Breve descripción de la estructura del proyecto y cómo están organizados los archivos y carpetas.
+```
+└── 📁src
+    └── app.controller.spec.ts
+    └── app.controller.ts
+    └── app.module.ts
+    └── app.service.ts
+    └── 📁auth
+        └── auth.controller.ts
+        └── auth.interface.ts
+        └── auth.middleware.ts
+        └── auth.module.ts
+        └── auth.service.ts
+        └── 📁guard
+            └── 📁auth
+                └── auth.guard.ts
+    └── 📁database
+        └── edgedb.module.ts
+    └── main.ts
+    └── 📁middleware
+        └── 📁logger
+            └── logger.middleware.ts
+    └── 📁opt
+        └── 📁group
+            └── 📁dto
+                └── create-group.dto.ts
+                └── update-group.dto.ts
+            └── 📁entities
+                └── group.entity.ts
+            └── group.controller.ts
+            └── group.module.ts
+            └── group.service.ts
+        └── opt.controller.ts
+        └── opt.module.ts
+        └── opt.service.ts
+        └── 📁plan
+            └── 📁dto
+                └── create-plan.dto.ts
+                └── update-plan.dto.ts
+            └── 📁entities
+                └── plan.entity.ts
+            └── plan.controller.ts
+            └── plan.module.ts
+            └── plan.service.ts
+    └── 📁suite
+        └── suite.controller.ts
+        └── suite.module.ts
+        └── suite.service.ts
+        └── 📁user
+            └── 📁dto
+                └── create-user.dto.ts
+                └── update-user.dto.ts
+            └── 📁pipes
+                └── 📁validate-user
+                    └── validate-user.pipe.ts
+            └── user.controller.ts
+            └── user.module.ts
+            └── user.service.ts
 
 ## Documentación
 

@@ -9,7 +9,6 @@ import { User } from './dto/create-user.dto';
 import { UpdateUser } from './dto/update-user.dto';
 import { Client } from 'edgedb';
 import { e } from 'src/database/edgedb.module';
-
 @Injectable()
 export class UserService {
   constructor(@Inject('EDGEDB_CLIENT') private readonly client: Client) {}
@@ -20,23 +19,29 @@ export class UserService {
     try {
       const query = await e
         .select(e.User, () => ({
-          id: true,
-          username: true,
-          email: true,
-          password: false,
-          birthday: true,
-          rol: {
-            name: true,
-            description: false,
-            permissions: false,
-          },
+          ...e.User['*'],
         }))
         .run(this.client);
+      console.log(query);
       return query;
     } catch (error) {
       console.log(error.message);
       throw new HttpException('BAD_REQUEST', HttpStatus.BAD_REQUEST);
     }
+  }
+
+  async findOneByEmail(email: string) {
+    try {
+      const emailFound = await e
+        .assert_single(
+          e.select(e.User, (user) => ({
+            filter: e.op(user.email, '=', email),
+            ...e.User['*'],
+          })),
+        )
+        .run(this.client);
+      return emailFound;
+    } catch (error) {}
   }
 
   async findOne(userId: string): Promise<User[]> {
@@ -46,6 +51,7 @@ export class UserService {
           filter_single: { id: userId },
           id: true,
           username: true,
+          name: true,
           email: true,
           birthday: true,
           password: false,
@@ -82,29 +88,23 @@ export class UserService {
   }
 
   async create(user: User): Promise<any> {
+    const roleName = user.rol ? user.rol.name : 'user';
     try {
-      const role = await e
-        .select(e.Rol, () => ({
-          filter_single: { name: user.rol.name },
-          limit: 1,
-          id: true,
-          name: true,
-          description: true,
-          permissions: true,
-        }))
-        .run(this.client);
-
-      console.log(role);
-
       const result = await e
         .insert(e.User, {
           username: user.username,
           email: user.email,
+          name: user.name,
           password: user.password,
           birthday: user.birthday,
+          rol: e.assert_single(
+            e.select(e.Rol, (rol) => ({
+              filter: e.op(rol.name, '=', roleName),
+            })),
+          ),
         })
         .run(this.client);
-
+      console.log(result);
       return result;
     } catch (error) {
       if (error.message.includes('constraint')) {

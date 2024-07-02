@@ -8,10 +8,10 @@ import * as $op from "./operators";
 import _std from "./modules/std";
 import _cal from "./modules/cal";
 import _cfg from "./modules/cfg";
+import _default from "./modules/default";
 import _fts from "./modules/fts";
 import _schema from "./modules/schema";
 import _sys from "./modules/sys";
-import _default from "./modules/default";
 import _math from "./modules/math";
 
 const ExportDefault: typeof _std & 
@@ -21,10 +21,10 @@ const ExportDefault: typeof _std &
   "std": typeof _std;
   "cal": typeof _cal;
   "cfg": typeof _cfg;
+  "default": typeof _default;
   "fts": typeof _fts;
   "schema": typeof _schema;
   "sys": typeof _sys;
-  "default": typeof _default;
   "math": typeof _math;
 } = {
   ..._std,
@@ -34,10 +34,10 @@ const ExportDefault: typeof _std &
   "std": _std,
   "cal": _cal,
   "cfg": _cfg,
+  "default": _default,
   "fts": _fts,
   "schema": _schema,
   "sys": _sys,
-  "default": _default,
   "math": _math,
 };
 const Cardinality = $.Cardinality;

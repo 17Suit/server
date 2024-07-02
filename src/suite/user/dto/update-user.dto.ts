@@ -15,6 +15,9 @@ export class UpdateUser {
   id: string;
   @IsString()
   username: string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
   @IsEmail()
   @IsNotEmpty()
   email: string;
