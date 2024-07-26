@@ -26,11 +26,11 @@ jobs:
 
       - name: Set up EdgeDB
         run: |
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y
           edgedb server install -y
 
       - name: Initialize EdgeDB project
-        run: edgedb project init -y --non-interactive --overwrite
+        run: edgedb project init --non-interactive --overwrite
         env:
           EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
