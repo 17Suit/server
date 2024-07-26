@@ -19,12 +19,6 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
-# Crea los directorios necesarios para EdgeDB
-RUN mkdir -p /root/.local/share/edgedb/data /root/.cache/edgedb/run
-
-# Inicializa el proyecto EdgeDB
-RUN source /root/.config/edgedb/env && edgedb project init 3FE3LE/seventeen-suit-db --non-interactive
-
 # Ejecuta el prebuild antes de la construcción
 RUN source /root/.config/edgedb/env && npm run prebuild
 
