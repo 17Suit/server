@@ -19,6 +19,9 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
+# Inicializa el proyecto EdgeDB
+RUN source /root/.config/edgedb/env && edgedb project init --non-interactive
+
 # Ejecuta el prebuild antes de la construcción
 RUN source /root/.config/edgedb/env && npm run prebuild
 
