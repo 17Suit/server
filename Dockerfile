@@ -19,9 +19,6 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
-# Ejecuta el prebuild antes de la construcción
-RUN source /root/.config/edgedb/env && npm run prebuild
-
 # Construye la aplicación NestJS
 RUN npm run build
 
