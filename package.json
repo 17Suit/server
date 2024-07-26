@@ -20,7 +20,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prebuild": "npx @edgedb/generate edgeql-js --dsn=edgedb://edgedb@seventeen-suit-db--3fe3le.c-88.i.aws.edgedb.cloud:5656/main --force-overwrite"
+    "prebuild": "npx @edgedb/generate edgeql-js --dsn=edgedb://edgedb@seventeen-suit-db--3fe3le.c-88.i.aws.edgedb.cloud:5656/main --target ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.3.9",
