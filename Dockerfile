@@ -5,7 +5,7 @@ FROM node:20-alpine
 RUN apk add --no-cache curl bash \
     && curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y \
     && source /root/.config/edgedb/env \
-    && edgedb server install -y
+    && edgedb server install
 
 # Establece el directorio de trabajo
 WORKDIR /app
