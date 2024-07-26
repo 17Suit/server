@@ -24,6 +24,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set up EdgeDB
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y
+          edgedb server install
+
+      - name: Initialize EdgeDB project
+        run: edgedb project init --non-interactive
+        env:
+          EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
+          EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
+
       # - name: Run tests
       #   env:
       #     EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
