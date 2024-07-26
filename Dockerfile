@@ -4,7 +4,8 @@ FROM node:20-alpine
 # Instala EdgeDB
 RUN apk add --no-cache curl bash \
     && curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y \
-    && edgedb server install
+    && source /root/.config/edgedb/env \
+    && edgedb server install -y
 
 # Establece el directorio de trabajo
 WORKDIR /app
@@ -19,7 +20,7 @@ RUN npm install
 COPY . .
 
 # Ejecuta el prebuild antes de la construcción
-RUN npm run prebuild
+RUN source /root/.config/edgedb/env && npm run prebuild
 
 # Construye la aplicación NestJS
 RUN npm run build
