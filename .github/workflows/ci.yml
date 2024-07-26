@@ -27,7 +27,7 @@ jobs:
       - name: Set up EdgeDB
         run: |
           curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y
-          edgedb server install -y
+          edgedb server install
 
       - name: Initialize EdgeDB project
         run: edgedb project init --non-interactive --overwrite
