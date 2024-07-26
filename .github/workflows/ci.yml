@@ -32,16 +32,20 @@ jobs:
       - name: Initialize EdgeDB project
         run: edgedb project init --non-interactive --overwrite
         env:
-          EDGEDB_SERVER_PASSWORD: ${{ secrets.EDGEDB_SERVER_PASSWORD }}
           EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
 
-      - name: Prebuild and Build project
+      # - name: Run tests
+      #   env:
+      #     EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
+      #     EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
+      #   run: npm run test
+
+      - name: Build project
         run: npm run build
 
-      - name: Deploy to Railway
-        uses: railwayapp/
-        with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
-          environment: production
-
+      # - name: Deploy to Railway
+      #   uses: railwayapp/railway-action@v1
+      #   with:
+      #     railway_token: ${{ secrets.RAILWAY_TOKEN }}
+      #     environment: production
