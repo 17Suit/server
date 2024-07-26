@@ -9,7 +9,7 @@ module default {
   }
 
   type Rol {
-    required property name -> str {
+    required name -> str {
       constraint exclusive;
     }
     required description -> str;
@@ -17,18 +17,76 @@ module default {
   }
 
   type User {
-    required username -> str {
-      constraint exclusive;
+    name -> str;
+    required email -> str {
+        constraint exclusive;
     }
-    required name -> str {
-      default:="";
+    required username: std::str {
+        constraint std::exclusive;
+    }
+    required password: std::str;
+    emailVerified -> datetime;
+    birthday: std::datetime;
+    image -> str;
+    multi link accounts := .<user[is Account];
+    multi link sessions := .<user[is Session];
+    createdAt -> datetime {
+        default := datetime_current();
     };
-    required email -> str;
-    required password -> str;
-    birthday -> datetime;
-    required rol -> Rol;
-    multi plans -> Plan;
-    multi groups -> PlanGroup
+    multi link plans: default::Plan;
+    required link rol: default::Rol;
+    multi link groups: default::PlanGroup;
+  }
+
+  type Account {
+    required userId := .user.id;
+    required type -> str;
+    required provider -> str;
+    required providerAccountId -> str {
+    constraint exclusive;
+    };
+    refresh_token -> str;
+    access_token -> str;
+    expires_at -> int64;
+    token_type -> str;
+    scope -> str;
+    id_token -> str;
+    session_state -> str;
+    required link user -> User {
+        on target delete delete source;
+    };
+    createdAt -> datetime {
+        default := datetime_current();
+    };
+
+    constraint exclusive on ((.provider, .providerAccountId))
+  }
+
+  type Session {
+    required sessionToken -> str {
+        constraint exclusive;
+    }
+    required userId := .user.id;
+    required expires -> datetime;
+    required link user -> User {
+        on target delete delete source;
+    };
+    createdAt -> datetime {
+        default := datetime_current();
+    };
+  }
+
+  type VerificationToken {
+    required identifier -> str;
+    required token -> str {
+        constraint exclusive;
+    }
+    required expires -> datetime;
+    createdAt -> datetime {
+        default := datetime_current();
+    };
+
+    constraint exclusive on ((.identifier, .token))
   }
 
   type Status {
