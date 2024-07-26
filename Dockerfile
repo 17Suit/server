@@ -23,7 +23,7 @@ COPY . .
 RUN mkdir -p /root/.local/share/edgedb/data /root/.cache/edgedb/run
 
 # Inicializa el proyecto EdgeDB
-RUN source /root/.config/edgedb/env && edgedb project init --link 3FE3LE/seventeen-suit-db --non-interactive
+RUN source /root/.config/edgedb/env && edgedb project init --server-instance=3FE3LE/seventeen-suit-db --non-interactive
 
 # Ejecuta el prebuild antes de la construcción
 RUN source /root/.config/edgedb/env && npm run prebuild
