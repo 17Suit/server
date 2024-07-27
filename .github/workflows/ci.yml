@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Edgedb generate edggeql-js
-        run: npx @edgedb/generate edgeql-js -I ${{ secrets.EDGEDB_INSTANCE }} --non-interactive
+        run: npx @edgedb/generate edgeql-js -I ${{ secrets.EDGEDB_INSTANCE }}
         env:
           EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
