@@ -1,10 +1,9 @@
 # Usa una imagen base oficial de Node.js
-FROM node:20-alpine
+FROM node:20.15
 
-# Instala las dependencias necesarias
-RUN apk add --no-cache curl bash \
-    && curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y \
-    && edgedb server install
+# Define argumentos que se pueden pasar durante la construcción
+ARG EDGEDB_INSTANCE
+ARG EDGEDB_SECRET_KEY
 
 # Establece el directorio de trabajo
 WORKDIR /app
@@ -21,7 +20,9 @@ COPY . .
 # Configura EdgeDB
 RUN mkdir -p /root/.config/edgedb/cloud-credentials
 RUN echo '{"secret_key": "'${EDGEDB_SECRET_KEY}'"}' > /root/.config/edgedb/cloud-credentials/default.json
-RUN edgedb project init --link --server-instance ${EDGEDB_INSTANCE} --non-interactive
+
+# Inicializa el proyecto EdgeDB
+RUN npx @edgedb/generate edgeql-js -I ${EDGEDB_INSTANCE}
 
 # Construye la aplicación NestJS
 RUN npm run build
