@@ -37,17 +37,13 @@ jobs:
           echo '{"secret_key": "'${{ secrets.EDGEDB_SECRET_KEY }}'"}' > /home/runner/.config/edgedb/cloud-credentials/default.json
 
       - name: Initialize EdgeDB project
-        run: |
-          source /home/runner/.config/edgedb/env
-          edgedb project init --link --server-instance 3FE3LE/seventeen-suit-db --non-interactive
+        run: edgedb project init --link --server-instance 3FE3LE/seventeen-suit-db --non-interactive
         env:
           EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
 
       - name: Prebuild EdgeDB
-        run: |
-          source /home/runner/.config/edgedb/env
-          npx @edgedb/generate edgeql-js -I 3FE3LE/seventeen-suit-db --target ts
+        run: npx @edgedb/generate edgeql-js -I 3FE3LE/seventeen-suit-db --target ts
         env:
           EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
