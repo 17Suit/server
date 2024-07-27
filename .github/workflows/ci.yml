@@ -43,7 +43,7 @@ jobs:
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
 
       - name: Prebuild EdgeDB
-        run: npx @edgedb/generate edgeql-js -I 3FE3LE/seventeen-suit-db --target ts
+        run: npx @edgedb/generate edgeql-js --target ts
         env:
           EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
