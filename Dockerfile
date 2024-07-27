@@ -18,15 +18,10 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
-# Inicializa EdgeDB
-RUN source /root/.config/edgedb/env && edgedb project init --non-interactive
-
-# Genera los archivos de EdgeDB
-ARG EDGEDB_SECRET_KEY
-RUN source /root/.config/edgedb/env \
-    && mkdir -p /root/.config/edgedb/cloud-credentials \
-    && echo "{\"secret_key\": \"${EDGEDB_SECRET_KEY}\"}" > /root/.config/edgedb/cloud-credentials/default.json \
-    && npx @edgedb/generate edgeql-js -I 3FE3LE/seventeen-suit-db --target ts
+# Configura EdgeDB
+RUN mkdir -p /root/.config/edgedb/cloud-credentials
+RUN echo '{"secret_key": "'${EDGEDB_SECRET_KEY}'"}' > /root/.config/edgedb/cloud-credentials/default.json
+RUN edgedb project init --link --server-instance ${EDGEDB_INSTANCE} --non-interactive
 
 # Construye la aplicación NestJS
 RUN npm run build
