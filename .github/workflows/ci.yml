@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches:
@@ -11,7 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -34,10 +32,10 @@ jobs:
 
       - name: Add EdgeDB secret key
         run: |
-          echo '{"secret_key": "'${{ secrets.EDGEDB_SECRET_KEY }}'"}' > /home/runner/.config/edgedb/cloud-credentials/default.json
+          echo '{"secret_key": "${{ secrets.EDGEDB_SECRET_KEY }}"}' > /home/runner/.config/edgedb/cloud-credentials/default.json
 
       - name: Initialize EdgeDB project
-        run: edgedb project init --link --server-instance 3FE3LE/seventeen-suit-db --non-interactive
+        run: edgedb project init --link --server-instance ${{ secrets.EDGEDB_INSTANCE }} --non-interactive
         env:
           EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
@@ -49,7 +47,7 @@ jobs:
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
 
       # - name: Deploy to Railway
-      #   uses: railwayapp/railway-action@v1
+      #   uses: railwayapp/railway-action@v2
       #   with:
       #     railway_token: ${{ secrets.RAILWAY_TOKEN }}
       #     environment: production
