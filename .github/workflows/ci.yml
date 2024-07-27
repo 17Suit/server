@@ -30,7 +30,7 @@ jobs:
           edgedb server install
 
       - name: Initialize EdgeDB project
-        run: edgedb project init --non-interactive
+        run: edgedb project init -I 3FE3LE/seventeen-suit-db --non-interactive
         env:
           EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
