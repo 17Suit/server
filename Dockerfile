@@ -18,7 +18,7 @@ RUN mkdir -p /root/.config/edgedb/cloud-credentials
 RUN echo '{"secret_key": "'${EDGEDB_SECRET_KEY}'"}' > /root/.config/edgedb/cloud-credentials/default.json
 
 # Inicializa el proyecto EdgeDB
-RUN npx @edgedb/generate edgeql-js -I ${EDGEDB_INSTANCE} --target ts
+RUN npx @edgedb/generate edgeql-js -I ${EDGEDB_INSTANCE}
 
 # Construye la aplicación NestJS
 RUN npm run build
