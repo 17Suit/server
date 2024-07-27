@@ -22,6 +22,24 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set up EdgeDB
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh -s -- -y
+          edgedb server install
+
+      - name: Create EdgeDB credentials directory
+        run: mkdir -p /home/runner/.config/edgedb/cloud-credentials
+
+      - name: Add EdgeDB secret key
+        run: |
+          echo '{"secret_key": "${{ secrets.EDGEDB_SECRET_KEY }}"}' > /home/runner/.config/edgedb/cloud-credentials/default.json
+
+      - name: Initialize EdgeDB project
+        run: edgedb project init --link --server-instance ${{ secrets.EDGEDB_INSTANCE }} --non-interactive
+        env:
+          EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
+          EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
+
       - name: Build project
         run: npm run build
         env:
@@ -32,4 +50,4 @@ jobs:
       #   uses: railwayapp/railway-action@v2
       #   with:
       #     railway_token: ${{ secrets.RAILWAY_TOKEN }}
-      #     environment: production
+          # environment: production
