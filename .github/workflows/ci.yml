@@ -22,8 +22,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Add EdgeDB secret key
+        run: |
+          echo '{"secret_key": "${{ secrets.EDGEDB_SECRET_KEY }}"}' > /home/runner/.config/edgedb/cloud-credentials/default.json
+
       - name: Edgedb generate edggeql-js
-        run: npx @edgedb/generate edgeql-js -I ${{ secrets.EDGEDB_INSTANCE }}
+        run: npx @edgedb/generate edgeql-js -I ${{ secrets.EDGEDB_INSTANCE }} --target ts
         env:
           EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
           EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
