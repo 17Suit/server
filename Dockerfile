@@ -1,5 +1,9 @@
 # Usa una imagen base oficial de Node.js
-FROM node:20-alpine
+FROM node:20.15
+
+# Define argumentos que se pueden pasar durante la construcción
+ARG EDGEDB_INSTANCE
+ARG EDGEDB_SECRET_KEY
 
 # Establece el directorio de trabajo
 WORKDIR /app
