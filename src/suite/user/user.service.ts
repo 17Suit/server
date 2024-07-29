@@ -1,3 +1,6 @@
+import { Client } from 'edgedb';
+import { e } from 'src/database/edgedb.module';
+
 import {
   HttpException,
   HttpStatus,
@@ -5,15 +8,13 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+
 import { User } from './dto/create-user.dto';
 import { UpdateUser } from './dto/update-user.dto';
-import { Client } from 'edgedb';
-import { e } from 'src/database/edgedb.module';
+
 @Injectable()
 export class UserService {
   constructor(@Inject('EDGEDB_CLIENT') private readonly client: Client) {}
-
-  private readonly users: User[] = [];
 
   async findAll(): Promise<User[]> {
     try {
@@ -36,7 +37,12 @@ export class UserService {
         .assert_single(
           e.select(e.User, (user) => ({
             filter: e.op(user.email, '=', email),
-            ...e.User['*'],
+            id: true,
+            email: true,
+            emailVerified: true,
+            name: true,
+            image: true,
+            password: true,
           })),
         )
         .run(this.client);
