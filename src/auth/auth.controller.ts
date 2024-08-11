@@ -1,3 +1,5 @@
+import { Response } from 'express';
+
 import {
   Body,
   Controller,
@@ -8,11 +10,14 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from './guard/auth.guard';
+import { ApiTags } from '@nestjs/swagger';
+
 import { AuthService } from './auth.service';
-import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { Response } from 'express';
+import { RegisterDto } from './dto/register.dto';
+import { AuthGuard } from './guard/auth.guard';
+
+@ApiTags('Authentication')
 @Controller('/auth')
 export class AuthController {
   @Get()

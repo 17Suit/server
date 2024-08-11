@@ -7,10 +7,13 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UpdateUser } from './dto/update-user.dto';
-import { User } from './dto/create-user.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+import { User } from './dto/create-user.dto';
+import { UpdateUser } from './dto/update-user.dto';
+import { UserService } from './user.service';
+
+@ApiTags('Users')
 @Controller('/users')
 export class UserController {
   constructor(private userService: UserService) {}
