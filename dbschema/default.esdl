@@ -21,10 +21,10 @@ module default {
     required email -> str {
         constraint exclusive;
     }
-    required username: std::str {
+    username: std::str {
         constraint std::exclusive;
     }
-    required password: std::str;
+    password: std::str;
     emailVerified -> datetime;
     birthday: std::datetime;
     image -> str;
@@ -34,7 +34,7 @@ module default {
         default := datetime_current();
     };
     multi link plans: default::Plan;
-    required link rol: default::Rol;
+    link rol: default::Rol;
     multi link groups: default::PlanGroup;
   }
 
