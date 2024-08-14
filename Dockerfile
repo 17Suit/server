@@ -13,6 +13,9 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
+# Generacion del cliente de Prisma
+RUN npx prisma generate
+
 # Construye la aplicación NestJS
 RUN npm run build
 
