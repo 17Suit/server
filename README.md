@@ -60,7 +60,7 @@ npm run start:dev
             └── 📁auth
                 └── auth.guard.ts
     └── 📁database
-        └── edgedb.module.ts
+        └── supabase.module.ts
     └── main.ts
     └── 📁middleware
         └── 📁logger
