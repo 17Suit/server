@@ -4,19 +4,20 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-// Common module
-import { EdgeDbModule } from './database/edgedb.module';
 import { AuthModule } from './auth/auth.module';
+// Common module
+import { PrismaModule } from './database/prisma.module';
+import { EventLoopMiddleware } from './middleware/event-loop/event-loop.middleware';
+import { LoggerMiddleware } from './middleware/logger/logger.middleware';
+import { OptModule } from './opt/opt.module';
 // Application module
 import { SuiteModule } from './suite/suite.module';
-import { OptModule } from './opt/opt.module';
-import { LoggerMiddleware } from './middleware/logger/logger.middleware';
-import { EventLoopMiddleware } from './middleware/event-loop/event-loop.middleware';
 
 @Module({
-  imports: [AuthModule, EdgeDbModule, SuiteModule, OptModule],
+  imports: [AuthModule, PrismaModule, SuiteModule, OptModule],
   controllers: [AppController],
   providers: [AppService],
 })
