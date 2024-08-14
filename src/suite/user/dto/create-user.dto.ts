@@ -1,38 +1,39 @@
-import { IsDate, IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import { Type } from 'class-transformer';
-import { Plan } from 'src/opt/plan/entities/plan.entity';
+import {
+  IsArray,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
-export class Rol {
+export class CreateUserDto {
+  @IsNotEmpty()
   @IsString()
   name: string;
-  @IsString()
-  description: string;
-  permissions: Permissions;
-}
 
-class Permissions {
-  read: boolean;
-  write: boolean;
-  create: boolean;
-  delete: boolean;
-  update: boolean;
-}
-export class User {
-  @IsString()
   @IsNotEmpty()
-  username: string;
-  @IsString()
-  @IsNotEmpty()
-  name: string;
   @IsEmail()
-  @IsNotEmpty()
   email: string;
+
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
+  image?: string;
+
+  @IsOptional()
+  @IsString()
   password: string;
-  @IsDate()
-  @Type(() => Date)
-  birthday?: Date;
-  rol?: Rol;
-  plans?: Plan[];
+
+  @IsOptional()
+  @IsArray()
+  // @IsUUID('4', { each: true })
+  planIds?: number[];
+
+  @IsOptional()
+  @IsArray()
+  // @IsUUID('4', { each: true })
+  planGroupIds?: number[];
+
+  @IsOptional()
+  // @IsUUID('4')
+  roleId?: number;
 }
