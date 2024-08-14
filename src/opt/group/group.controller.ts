@@ -29,17 +29,17 @@ export class GroupController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.groupService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
+  update(@Param('id') id: number, @Body() updateGroupDto: UpdateGroupDto) {
     return this.groupService.update(id, updateGroupDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.groupService.remove(id);
   }
 }

@@ -1,12 +1,14 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { GroupService } from './group.service';
-import { GroupController } from './group.controller';
-import { EdgeDbModule } from 'src/database/edgedb.module';
-import { LoggerMiddleware } from 'src/middleware/logger/logger.middleware';
 import { AuthMiddleware } from 'src/auth/middleware/auth.middleware';
+import { PrismaModule } from 'src/database/prisma.module';
+import { LoggerMiddleware } from 'src/middleware/logger/logger.middleware';
+
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+
+import { GroupController } from './group.controller';
+import { GroupService } from './group.service';
 
 @Module({
-  imports: [EdgeDbModule],
+  imports: [PrismaModule],
   controllers: [GroupController],
   providers: [GroupService],
 })

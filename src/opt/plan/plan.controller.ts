@@ -43,7 +43,7 @@ export class PlanController {
     description: 'Return the plan with the specified ID.',
   })
   @ApiResponse({ status: 404, description: 'Plan not found.' })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.planService.findOne(id);
   }
 
@@ -54,7 +54,7 @@ export class PlanController {
     description: 'The plan has been successfully updated.',
   })
   @ApiResponse({ status: 404, description: 'Plan not found.' })
-  update(@Param('id') id: string, @Body() updatePlanDto: UpdatePlanDto) {
+  update(@Param('id') id: number, @Body() updatePlanDto: UpdatePlanDto) {
     return this.planService.update(id, updatePlanDto);
   }
 
@@ -65,7 +65,7 @@ export class PlanController {
     description: 'The plan has been successfully deleted.',
   })
   @ApiResponse({ status: 404, description: 'Plan not found.' })
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.planService.remove(id);
   }
 }
