@@ -28,7 +28,6 @@ export class AuthService {
     const hashedPassword = await bcryptjs.hash(password, 10);
 
     await this.usersService.create({
-      username: email,
       name,
       email,
       password: hashedPassword,
@@ -46,6 +45,15 @@ export class AuthService {
       throw new UnauthorizedException('Invalid email or password+');
     }
 
+    const payload = {
+      id: user.id,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      name: user.name,
+      image: user.image,
+    };
+
+    const token = await this.jwtService.signAsync(payload);
     const isPasswordValid = await bcryptjs.compare(password, user.password);
 
     if (!isPasswordValid) {
@@ -53,11 +61,8 @@ export class AuthService {
     }
 
     return {
-      id: user.id,
-      email: user.email,
-      emailVerified: user.emailVerified,
-      name: user.name,
-      image: user.image,
+      ...payload,
+      token,
     };
   }
 }

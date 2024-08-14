@@ -1,25 +1,32 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe } from '@nestjs/common';
-import { SuiteModule } from './suite/suite.module';
+import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
+import { AppModule } from './app.module';
+import { GroupModule } from './opt/group/group.module';
 import { OptModule } from './opt/opt.module';
 import { PlanModule } from './opt/plan/plan.module';
-import { GroupModule } from './opt/group/group.module';
+import { SuiteModule } from './suite/suite.module';
 import { UsersModule } from './suite/user/user.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // Swagger configuration to all modules
+
+  // Configura el prefijo global antes de la configuración de Swagger
+  const globalPrefix = 'server';
+  app.setGlobalPrefix(globalPrefix);
+
+  // Configuración de Swagger para todos los módulos
   const appConfig = new DocumentBuilder()
     .setTitle('17 Suit server')
     .setDescription('17Suit API documentation')
     .setVersion('1.0')
     .build();
-  const appDocument = SwaggerModule.createDocument(app, appConfig);
-  SwaggerModule.setup('api', app, appDocument);
+  const appDocument = SwaggerModule.createDocument(app, appConfig, {
+    ignoreGlobalPrefix: false,
+  });
+  SwaggerModule.setup(`${globalPrefix}/`, app, appDocument);
 
-  // Swagger configuration to suite modules
   const suiteConfig = new DocumentBuilder()
     .setTitle('Suite API')
     .setDescription('Suite API documentation')
@@ -28,10 +35,10 @@ async function bootstrap() {
     .build();
   const suiteDocument = SwaggerModule.createDocument(app, suiteConfig, {
     include: [SuiteModule, UsersModule],
+    ignoreGlobalPrefix: false,
   });
-  SwaggerModule.setup('suite/api', app, suiteDocument);
+  SwaggerModule.setup(`${globalPrefix}/suite`, app, suiteDocument);
 
-  // Swagger configuration to one plan trip modules
   const optConfig = new DocumentBuilder()
     .setTitle('One plan trip API')
     .setDescription('One plan trip API documentation')
@@ -40,8 +47,9 @@ async function bootstrap() {
     .build();
   const optDocument = SwaggerModule.createDocument(app, optConfig, {
     include: [OptModule, PlanModule, GroupModule],
+    ignoreGlobalPrefix: false,
   });
-  SwaggerModule.setup('opt/api', app, optDocument);
+  SwaggerModule.setup(`${globalPrefix}/opt`, app, optDocument);
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -51,8 +59,6 @@ async function bootstrap() {
     }),
   );
 
-  const globalPrefix = 'server';
-  app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3000;
   await app.listen(port);
   Logger.log(
@@ -65,4 +71,5 @@ async function bootstrap() {
     credentials: true,
   });
 }
+
 bootstrap();

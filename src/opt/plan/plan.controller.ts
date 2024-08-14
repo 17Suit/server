@@ -1,18 +1,19 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Put,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Post,
+  Put,
 } from '@nestjs/common';
-import { PlanService } from './plan.service';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { CreatePlanDto } from './dto/create-plan.dto';
 import { UpdatePlanDto } from './dto/update-plan.dto';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { PlanService } from './plan.service';
 
-@ApiTags('plans')
+@ApiTags('Plans')
 @Controller('plans')
 export class PlanController {
   constructor(private readonly planService: PlanService) {}
@@ -42,7 +43,7 @@ export class PlanController {
     description: 'Return the plan with the specified ID.',
   })
   @ApiResponse({ status: 404, description: 'Plan not found.' })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.planService.findOne(id);
   }
 
@@ -53,7 +54,7 @@ export class PlanController {
     description: 'The plan has been successfully updated.',
   })
   @ApiResponse({ status: 404, description: 'Plan not found.' })
-  update(@Param('id') id: string, @Body() updatePlanDto: UpdatePlanDto) {
+  update(@Param('id') id: number, @Body() updatePlanDto: UpdatePlanDto) {
     return this.planService.update(id, updatePlanDto);
   }
 
@@ -64,7 +65,7 @@ export class PlanController {
     description: 'The plan has been successfully deleted.',
   })
   @ApiResponse({ status: 404, description: 'Plan not found.' })
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.planService.remove(id);
   }
 }

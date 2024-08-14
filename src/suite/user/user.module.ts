@@ -1,11 +1,13 @@
+import { AuthMiddleware } from 'src/auth/middleware/auth.middleware';
+import { PrismaModule } from 'src/database/prisma.module';
+
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-import { AuthMiddleware } from 'src/auth/middleware/auth.middleware';
-import { EdgeDbModule } from 'src/database/edgedb.module';
 
 @Module({
-  imports: [EdgeDbModule],
+  imports: [PrismaModule],
   controllers: [UserController],
   providers: [UserService],
   exports: [UserService],

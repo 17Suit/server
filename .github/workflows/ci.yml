@@ -22,24 +22,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Create EdgeDB credentials directory
-        run: mkdir -p /home/runner/.config/edgedb/cloud-credentials
-
-      - name: Add EdgeDB secret key
-        run: |
-          echo '{"secret_key": "${{ secrets.EDGEDB_SECRET_KEY }}"}' > /home/runner/.config/edgedb/cloud-credentials/default.json
-
-      - name: Edgedb generate edggeql-js
-        run: npx @edgedb/generate edgeql-js -I ${{ secrets.EDGEDB_INSTANCE }} --target ts
+      - name: Generate prisma schema
+        run: npx prisma generate
         env:
-          EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
-          EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
+          DATABALE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Build project
         run: npm run build
-        env:
-          EDGEDB_INSTANCE: ${{ secrets.EDGEDB_INSTANCE }}
-          EDGEDB_SECRET_KEY: ${{ secrets.EDGEDB_SECRET_KEY }}
 
       - name: Install Railway CLI
         run: npm i -g @railway/cli
