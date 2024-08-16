@@ -1,65 +1,105 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsDate } from 'class-validator';
+import {
+  IsArray,
+  IsDate,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
-class BudgetDto {
-  @ApiProperty({ description: 'Budget amount' })
-  amount: number;
+import { ApiProperty } from '@nestjs/swagger';
 
-  @ApiProperty({ description: 'Minimum budget' })
-  min: number;
+class CreateDestinationDto {
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-  @ApiProperty({ description: 'Maximum budget' })
-  max: number;
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  description?: string;
 
-  @ApiProperty({ description: 'Currency ID' })
-  currencyId: string;
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  address?: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
+  cityId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  latitude: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  longitude: number;
 }
 
+class CreateBudgetDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
+  currencyId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  amount: number;
+
+  @ApiProperty()
+  @IsOptional()
+  min?: number;
+
+  @ApiProperty()
+  @IsOptional()
+  max?: number;
+}
 export class CreatePlanDto {
-  @ApiProperty({ description: 'Title of the plan' })
-  readonly title: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  userId: string;
 
-  @ApiProperty({ description: 'Description of the plan' })
-  readonly description: string;
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  title: string;
 
-  @ApiProperty({ description: 'Status ID of the plan' })
-  readonly statusId: string;
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  description?: string;
 
-  @ApiProperty({ description: 'Owner ID of the plan' })
-  readonly ownerId: string;
-
-  @ApiProperty({ description: 'Start date of the plan', required: false })
+  @ApiProperty()
+  @IsOptional()
+  @Type(() => Date) // Transforma la cadena en instancia de Date
   @IsDate()
-  @Type(() => Date)
-  readonly startDate?: Date;
+  startDate?: Date;
 
-  @ApiProperty({ description: 'End date of the plan', required: false })
+  @ApiProperty()
+  @IsOptional()
+  @Type(() => Date) // Transforma la cadena en instancia de Date
   @IsDate()
-  @Type(() => Date)
-  readonly endDate?: Date;
+  endDate?: Date;
 
-  @ApiProperty({
-    description: 'Budget of the plan',
-    type: BudgetDto,
-    required: false,
-  })
-  readonly budget?: BudgetDto;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
+  statusId: number;
 
-  @ApiProperty({ description: 'Destination ID of the plan', required: false })
-  readonly destinationId?: string;
+  @ApiProperty({ type: () => CreateBudgetDto })
+  @ValidateNested()
+  @Type(() => CreateBudgetDto)
+  budget: CreateBudgetDto;
 
-  @ApiProperty({
-    description: 'Array of member IDs to be added to the plan',
-    type: [String],
-    required: false,
-  })
-  readonly memberIds?: string[];
-
-  @ApiProperty({
-    description: 'Array of activity IDs to be added to the plan',
-    type: [String],
-    required: false,
-  })
-  readonly activityIds?: string[];
+  @ApiProperty({ type: () => [CreateDestinationDto] })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateDestinationDto)
+  destinations: CreateDestinationDto[];
 }

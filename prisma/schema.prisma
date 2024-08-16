@@ -137,8 +137,6 @@ model Destination {
   address     String?
   latitude    Float
   longitude   Float
-  countryId   Int
-  stateId     Int
   cityId      Int
   createdAt   DateTime @default(now())
   city        City     @relation(fields: [cityId], references: [id])
@@ -153,7 +151,7 @@ model Plan {
   createdAt    DateTime      @default(now())
   statusId     Int
   status       Status        @relation(fields: [statusId], references: [id])
-  userId       Int
+  userId       String
   startDate    DateTime?
   endDate      DateTime?
   budgetId     Int
