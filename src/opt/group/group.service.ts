@@ -14,21 +14,21 @@ export class GroupService {
 
   async findAll() {}
 
-  async findOne(id: number) {
-    return await this.prisma.planGroup.findUnique({
+  async findOne(id: string) {
+    return await this.prisma.tripGroup.findUnique({
       where: { id },
     });
   }
 
-  async update(id: number, updateGroupDto: UpdateGroupDto) {
-    return await this.prisma.planGroup.update({
+  async update(id: string, updateGroupDto: UpdateGroupDto) {
+    return await this.prisma.tripGroup.update({
       where: { id },
       data: updateGroupDto,
     });
   }
 
-  async remove(id: number) {
-    return await this.prisma.planGroup.delete({
+  async remove(id: string) {
+    return await this.prisma.tripGroup.delete({
       where: { id },
     });
   }
