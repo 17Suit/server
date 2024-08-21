@@ -4,20 +4,20 @@ import { LoggerMiddleware } from 'src/middleware/logger/logger.middleware';
 
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
-import { PlanController } from './plan.controller';
-import { PlanService } from './plan.service';
+import { TripController } from './trip.controller';
+import { TripService } from './trip.service';
 
 @Module({
   imports: [PrismaModule],
-  controllers: [PlanController],
-  providers: [PlanService],
+  controllers: [TripController],
+  providers: [TripService],
 })
-export class PlanModule implements NestModule {
+export class TripModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
-      .forRoutes('plans')
+      .forRoutes('trips')
       .apply(AuthMiddleware)
-      .forRoutes('plans');
+      .forRoutes('trips');
   }
 }
