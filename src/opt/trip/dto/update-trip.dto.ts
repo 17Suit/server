@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import { IsDate, IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
 
 import { ApiPropertyOptional } from '@nestjs/swagger';
@@ -37,11 +38,13 @@ export class UpdateTripDto {
 
   @ApiPropertyOptional({ description: 'The updated start date of the trip' })
   @IsOptional()
+  @Type(() => Date)
   @IsDate()
   startDate?: Date;
 
   @ApiPropertyOptional({ description: 'The updated end date of the trip' })
   @IsOptional()
+  @Type(() => Date)
   @IsDate()
   endDate?: Date;
 
