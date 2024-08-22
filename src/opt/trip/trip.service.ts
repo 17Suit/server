@@ -22,7 +22,15 @@ export class TripService {
       tripType,
     } = createTripDto;
 
-    return this.prisma.trip.create({
+    const userExists = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!userExists) {
+      throw new Error(`User with ID ${userId} does not exist`);
+    }
+
+    return await this.prisma.trip.create({
       data: {
         title,
         description,
