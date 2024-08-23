@@ -22,6 +22,9 @@ export class AuthMiddleware implements NestMiddleware {
       req['user'] = decoded;
       next();
     } catch (error) {
+      if (error.name === 'TokenExpiredError') {
+        throw new HttpException('Token expired', HttpStatus.UNAUTHORIZED);
+      }
       throw new HttpException('Invalid token', HttpStatus.FORBIDDEN);
     }
   }

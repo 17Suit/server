@@ -53,7 +53,9 @@ export class AuthService {
       image: user.image,
     };
 
-    const token = await this.jwtService.signAsync(payload);
+    const token = await this.jwtService.signAsync(payload, {
+      expiresIn: '30d',
+    });
     const isPasswordValid = await bcryptjs.compare(password, user.password);
 
     if (!isPasswordValid) {
