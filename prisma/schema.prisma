@@ -24,8 +24,10 @@ model User {
   role      Role?       @relation(fields: [roleId], references: [id])
   trips     Trip[]
   accounts  Account[]
-  tripGroup TripGroup[]
+  tripGroup TripGroup[] @relation("GroupMembers")
   Payment   Payment[]
+  Budget    Budget[]
+  groups    TripGroup[]
 
   @@map("users")
 }
@@ -70,9 +72,11 @@ model Budget {
   min        Float
   max        Float
   currencyId Int
+  userId     String
   currency   Currency @relation(fields: [currencyId], references: [id])
 
-  trips Trip[]
+  user User   @relation(fields: [userId], references: [id])
+  Trip Trip[]
 }
 
 model Currency {
@@ -181,17 +185,17 @@ model Invitation {
 }
 
 model Activity {
-  id            String       @id @default(uuid())
+  id            String        @id @default(uuid())
   name          String
   description   String
-  createdAt     DateTime     @default(now())
+  createdAt     DateTime      @default(now())
   startTime     DateTime?
   endTime       DateTime?
-  priority      Priority     @default(Medium)
+  priority      Priority      @default(Medium)
   tripId        String? // Relación opcional con un Trip
   destinationId String? // Relación opcional con un Destination
-  trip          Trip?        @relation(fields: [tripId], references: [id])
-  destination   Destination? @relation(fields: [destinationId], references: [id])
+  trip          Trip[]
+  destination   Destination[]
 }
 
 model TripGroup {
@@ -199,9 +203,10 @@ model TripGroup {
   name        String
   description String
   createdAt   DateTime @default(now())
-  creatorId   Int
+  userId      String
   trips       Trip[] // Relación con múltiples Trips
-  members     User[]
+  members     User[]   @relation("GroupMembers")
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 // Modelos base para planes de pago
