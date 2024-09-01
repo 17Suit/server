@@ -46,13 +46,13 @@ export class TripService {
     });
   }
 
-  async findAll() {
-    return await this.prisma.trip.findMany();
+  async findAll(userId: string) {
+    return await this.prisma.trip.findMany({ where: { userId } });
   }
 
-  async findOne(id: string) {
+  async findOne(id: string, userId: string) {
     return await this.prisma.trip.findUnique({
-      where: { id },
+      where: { id, userId },
       include: {
         budget: {
           select: {
