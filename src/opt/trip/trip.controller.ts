@@ -50,10 +50,8 @@ export class TripController {
     description: 'Return the trip with the specified ID.',
   })
   @ApiResponse({ status: 404, description: 'Trip not found.' })
-  @UseGuards(AuthGuard)
-  findOne(@Param('id') id: string, @Req() request: Request) {
-    const userId = request['user'].id;
-    return this.tripService.findOne(id, userId);
+  findOne(@Param('id') id: string) {
+    return this.tripService.findOne(id);
   }
 
   @Put(':id')

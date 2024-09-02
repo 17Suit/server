@@ -1,5 +1,12 @@
 import { Type } from 'class-transformer';
-import { IsDate, IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
+import {
+  IsDate,
+  IsEnum,
+  IsInt,
+  IsOptional,
+  IsString,
+  IsUrl,
+} from 'class-validator';
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { TripPriority, TripStatus, TripType } from '@prisma/client';
@@ -58,9 +65,17 @@ export class CreateTripDto {
   @ApiPropertyOptional({
     description: 'The type of the trip',
     enum: TripType,
-    default: TripType.SOLO,
   })
   @IsOptional()
   @IsEnum(TripType)
-  tripType?: TripType = TripType.SOLO;
+  tripType?: TripType;
+
+  @ApiPropertyOptional({ description: 'El enlace compartible del viaje' })
+  @IsOptional()
+  @IsUrl()
+  shareableLink?: string;
+
+  @ApiPropertyOptional({ description: 'El código QR asociado al viaje' })
+  @IsOptional()
+  qrCode?: string;
 }
