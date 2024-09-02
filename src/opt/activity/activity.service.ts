@@ -1,26 +1,43 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
+
 import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
+import { Activity } from './entities/activity.entity';
 
 @Injectable()
 export class ActivityService {
-  create(createActivityDto: CreateActivityDto) {
-    return 'This action adds a new activity';
+  constructor(@Inject('PRISMA_CLIENT') private prisma: PrismaClient) {}
+
+  async create(createActivityDto: CreateActivityDto): Promise<Activity> {
+    return this.prisma.activity.create({
+      data: createActivityDto,
+    });
   }
 
-  findAll() {
-    return `This action returns all activity`;
+  async findAll(): Promise<Activity[]> {
+    return this.prisma.activity.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} activity`;
+  async findOne(id: string): Promise<Activity | null> {
+    return this.prisma.activity.findUnique({
+      where: { id },
+    });
   }
 
-  update(id: number, updateActivityDto: UpdateActivityDto) {
-    return `This action updates a #${id} activity`;
+  async update(
+    id: string,
+    updateActivityDto: UpdateActivityDto,
+  ): Promise<Activity> {
+    return this.prisma.activity.update({
+      where: { id },
+      data: updateActivityDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} activity`;
+  async remove(id: string): Promise<Activity> {
+    return this.prisma.activity.delete({
+      where: { id },
+    });
   }
 }

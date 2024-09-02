@@ -1,34 +1,83 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { ActivityService } from './activity.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
+import { Activity } from './entities/activity.entity';
 
+@ApiTags('Activities')
 @Controller('activity')
 export class ActivityController {
   constructor(private readonly activityService: ActivityService) {}
 
   @Post()
-  create(@Body() createActivityDto: CreateActivityDto) {
+  @ApiOperation({ summary: 'Crear una nueva actividad' })
+  @ApiResponse({
+    status: 201,
+    description: 'La actividad ha sido creada exitosamente.',
+    type: Activity,
+  })
+  async create(
+    @Body() createActivityDto: CreateActivityDto,
+  ): Promise<Activity> {
     return this.activityService.create(createActivityDto);
   }
 
   @Get()
-  findAll() {
+  @ApiOperation({ summary: 'Obtener todas las actividades' })
+  @ApiResponse({
+    status: 200,
+    description: 'Las actividades han sido obtenidas exitosamente.',
+    type: [Activity],
+  })
+  async findAll(): Promise<Activity[]> {
     return this.activityService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.activityService.findOne(+id);
+  @ApiOperation({ summary: 'Obtener una actividad por id' })
+  @ApiParam({ name: 'id', description: 'El id de la actividad' })
+  @ApiResponse({
+    status: 200,
+    description: 'La actividad encontrada',
+    type: Activity,
+  })
+  async findOne(@Param('id') id: string): Promise<Activity> {
+    return this.activityService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateActivityDto: UpdateActivityDto) {
-    return this.activityService.update(+id, updateActivityDto);
+  @Put(':id')
+  @ApiOperation({ summary: 'Actualizar una actividad' })
+  @ApiParam({ name: 'id', description: 'El id de la actividad a actualizar' })
+  @ApiResponse({
+    status: 200,
+    description: 'La actividad ha sido actualizada exitosamente.',
+    type: Activity,
+  })
+  async update(
+    @Param('id') id: string,
+    @Body() updateActivityDto: UpdateActivityDto,
+  ): Promise<Activity> {
+    return this.activityService.update(id, updateActivityDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.activityService.remove(+id);
+  @ApiOperation({ summary: 'Eliminar una actividad' })
+  @ApiParam({ name: 'id', description: 'El id de la actividad a eliminar' })
+  @ApiResponse({
+    status: 200,
+    description: 'La actividad ha sido eliminada exitosamente.',
+  })
+  async remove(@Param('id') id: string): Promise<Activity> {
+    return this.activityService.remove(id);
   }
 }
