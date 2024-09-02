@@ -96,8 +96,9 @@ model Destination {
   address     String?
   city        String?
   state       String?
+  country     String?
+  countryCode String?
   continent   String?
-  postalCode  String?
   latitude    Float
   longitude   Float
   createdAt   DateTime @default(now())
