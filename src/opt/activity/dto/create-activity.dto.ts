@@ -1,4 +1,4 @@
-import { IsDateString, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsOptional, IsString } from 'class-validator';
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Priority } from '@prisma/client';
@@ -29,6 +29,7 @@ export class CreateActivityDto {
     enum: Priority,
     default: Priority.Medium,
   })
+  @IsEnum(Priority)
   priority: Priority;
 
   @ApiPropertyOptional({
