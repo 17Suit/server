@@ -1,29 +1,5 @@
-import { IsArray, IsEmail, IsOptional, IsString } from 'class-validator';
+import { PartialType } from '@nestjs/swagger';
 
-export class UpdateUserDto {
-  @IsOptional()
-  @IsString()
-  name?: string;
+import { CreateUserDto } from './create-user.dto';
 
-  @IsOptional()
-  @IsEmail()
-  email?: string;
-
-  @IsOptional()
-  @IsString()
-  image?: string;
-
-  @IsOptional()
-  @IsArray()
-  // @IsUUID('4', { each: true })
-  planIds?: number[];
-
-  @IsOptional()
-  @IsArray()
-  // @IsUUID('4', { each: true })
-  planGroupIds?: number[];
-
-  @IsOptional()
-  // @IsUUID('4')
-  roleId?: number;
-}
+export class UpdateUserDto extends PartialType(CreateUserDto) {}
