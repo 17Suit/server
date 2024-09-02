@@ -1,26 +1,40 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
+
 import { CreateBudgetDto } from './dto/create-budget.dto';
 import { UpdateBudgetDto } from './dto/update-budget.dto';
+import { Budget } from './entities/budget.entity';
 
 @Injectable()
 export class BudgetService {
-  create(createBudgetDto: CreateBudgetDto) {
-    return 'This action adds a new budget';
+  constructor(@Inject('PRISMA_CLIENT') private prisma: PrismaClient) {}
+
+  async create(createBudgetDto: CreateBudgetDto): Promise<Budget> {
+    return this.prisma.budget.create({
+      data: createBudgetDto,
+    });
   }
 
-  findAll() {
-    return `This action returns all budget`;
+  async findAll(): Promise<Budget[]> {
+    return this.prisma.budget.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} budget`;
+  async findOne(id: number): Promise<Budget | null> {
+    return this.prisma.budget.findUnique({
+      where: { id },
+    });
   }
 
-  update(id: number, updateBudgetDto: UpdateBudgetDto) {
-    return `This action updates a #${id} budget`;
+  async update(id: number, updateBudgetDto: UpdateBudgetDto): Promise<Budget> {
+    return this.prisma.budget.update({
+      where: { id },
+      data: updateBudgetDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} budget`;
+  async remove(id: number): Promise<Budget> {
+    return this.prisma.budget.delete({
+      where: { id },
+    });
   }
 }
