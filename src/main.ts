@@ -1,3 +1,5 @@
+import * as fs from 'fs';
+
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -19,6 +21,7 @@ async function bootstrap() {
   const appDocument = SwaggerModule.createDocument(app, appConfig, {
     ignoreGlobalPrefix: false,
   });
+  fs.writeFileSync('openapi.json', JSON.stringify(appDocument, null, 2));
   SwaggerModule.setup(`${globalPrefix}/`, app, appDocument);
 
   // Enable CORS con configuración correcta
