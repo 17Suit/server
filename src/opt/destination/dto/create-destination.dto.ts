@@ -42,11 +42,6 @@ export class CreateDestinationDto {
   @IsString()
   continent?: string;
 
-  @ApiPropertyOptional({ description: 'The postal code of the destination' })
-  @IsOptional()
-  @IsString()
-  postalCode?: string;
-
   @ApiProperty({ description: 'The latitude of the destination' })
   @IsNumber()
   latitude: number;

@@ -28,9 +28,6 @@ export class Destination {
   @ApiPropertyOptional({ description: 'El continente del destino' })
   continent?: string;
 
-  @ApiPropertyOptional({ description: 'El código postal del destino' })
-  postalCode?: string;
-
   @ApiProperty({ description: 'La latitud del destino' })
   latitude: number;
 
