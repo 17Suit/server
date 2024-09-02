@@ -1,26 +1,45 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
+
 import { CreateDestinationDto } from './dto/create-destination.dto';
 import { UpdateDestinationDto } from './dto/update-destination.dto';
+import { Destination } from './entities/destination.entity';
 
 @Injectable()
 export class DestinationService {
-  create(createDestinationDto: CreateDestinationDto) {
-    return 'This action adds a new destination';
+  constructor(@Inject('PRISMA_CLIENT') private prisma: PrismaClient) {}
+
+  async create(
+    createDestinationDto: CreateDestinationDto,
+  ): Promise<Destination> {
+    return this.prisma.destination.create({
+      data: createDestinationDto,
+    });
   }
 
-  findAll() {
-    return `This action returns all destination`;
+  async findAll(): Promise<Destination[]> {
+    return this.prisma.destination.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} destination`;
+  async findOne(id: string): Promise<Destination | null> {
+    return this.prisma.destination.findUnique({
+      where: { id },
+    });
   }
 
-  update(id: number, updateDestinationDto: UpdateDestinationDto) {
-    return `This action updates a #${id} destination`;
+  async update(
+    id: string,
+    updateDestinationDto: UpdateDestinationDto,
+  ): Promise<Destination> {
+    return this.prisma.destination.update({
+      where: { id },
+      data: updateDestinationDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} destination`;
+  async remove(id: string): Promise<Destination> {
+    return this.prisma.destination.delete({
+      where: { id },
+    });
   }
 }
