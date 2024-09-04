@@ -1,3 +1,6 @@
+import { Request } from 'express';
+import { AuthGuard } from 'src/auth/guard/auth.guard';
+
 import {
   Body,
   Controller,
@@ -6,6 +9,8 @@ import {
   Param,
   Post,
   Put,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -32,8 +37,10 @@ export class TripController {
   @Get()
   @ApiOperation({ summary: 'Get all trips' })
   @ApiResponse({ status: 200, description: 'Return all trips.' })
-  findAll() {
-    return this.tripService.findAll();
+  @UseGuards(AuthGuard)
+  findAll(@Req() request: Request) {
+    const userId = request['user'].id;
+    return this.tripService.findAll(userId);
   }
 
   @Get(':id')

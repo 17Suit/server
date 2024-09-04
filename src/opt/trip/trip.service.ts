@@ -1,45 +1,56 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
 import { CreateTripDto } from './dto/create-trip.dto';
 import { UpdateTripDto } from './dto/update-trip.dto';
+import { Trip } from './entities/trip.entity';
 
 @Injectable()
 export class TripService {
   constructor(@Inject('PRISMA_CLIENT') private readonly prisma: PrismaClient) {}
 
-  async create(createTripDto: CreateTripDto) {
-    const {
-      title,
-      description,
-      userId,
-      budgetId,
-      tripGroupId,
-      startDate,
-      endDate,
-      priority,
-      status,
-      tripType,
-    } = createTripDto;
+  async create(createTripDto: CreateTripDto): Promise<Trip> {
+    const { userId, budgetId, tripGroupId } = createTripDto;
 
-    return this.prisma.trip.create({
-      data: {
-        title,
-        description,
-        userId,
-        budgetId,
-        tripGroupId,
-        startDate,
-        endDate,
-        priority,
-        status,
-        tripType,
-      },
+    if (budgetId) {
+      try {
+        await this.prisma.budget.findUniqueOrThrow({
+          where: { id: budgetId },
+        });
+      } catch (error) {
+        throw new BadRequestException(
+          `Budget with ID ${budgetId} does not exist`,
+        );
+      }
+    }
+
+    if (tripGroupId) {
+      try {
+        await this.prisma.tripGroup.findUniqueOrThrow({
+          where: { id: tripGroupId },
+        });
+      } catch (error) {
+        throw new BadRequestException(
+          `TripGroup with ID ${tripGroupId} does not exist`,
+        );
+      }
+    }
+
+    try {
+      await this.prisma.user.findUniqueOrThrow({
+        where: { id: userId },
+      });
+    } catch (error) {
+      throw new BadRequestException(`User with ID ${userId} does not exist`);
+    }
+
+    return await this.prisma.trip.create({
+      data: createTripDto,
     });
   }
 
-  async findAll() {
-    return await this.prisma.trip.findMany();
+  async findAll(userId: string) {
+    return await this.prisma.trip.findMany({ where: { userId } });
   }
 
   async findOne(id: string) {
@@ -62,6 +73,15 @@ export class TripService {
             latitude: true,
             longitude: true,
             city: true,
+          },
+        },
+        activities: {
+          select: {
+            name: true,
+            description: true,
+            startTime: true,
+            endTime: true,
+            priority: true,
           },
         },
       },
