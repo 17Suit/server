@@ -37,5 +37,5 @@ export class Activity {
   @ApiPropertyOptional({
     description: 'El ID del destino relacionado con la actividad',
   })
-  destinationId?: string;
+  destinyId?: string;
 }

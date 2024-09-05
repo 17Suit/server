@@ -65,7 +65,7 @@ export class TripService {
             currency: true,
           },
         },
-        destinations: {
+        destinies: {
           select: {
             name: true,
             description: true,

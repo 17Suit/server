@@ -47,7 +47,7 @@ export class Trip {
   qrCode?: string;
 
   @ApiPropertyOptional({ description: 'Los destinos asociados al viaje' })
-  destinations?: string[];
+  destinies?: string[];
 
   @ApiPropertyOptional({ description: 'Las actividades asociadas al viaje' })
   activities?: string[];

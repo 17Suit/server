@@ -44,5 +44,5 @@ export class CreateActivityDto {
   })
   @IsOptional()
   @IsString()
-  destinationId?: string;
+  destinyId?: string;
 }
