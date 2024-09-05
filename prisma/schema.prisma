@@ -91,7 +91,7 @@ model Currency {
   Payment     Payment[]
 }
 
-model Destination {
+model Destiny {
   id          String   @id @default(uuid())
   name        String   @db.VarChar(255) // Limite de longitud
   description String?
@@ -122,7 +122,7 @@ enum TripType {
 
 enum TripPriority {
   BUDGET
-  DESTINATION
+  DESTINY
   COMPANY
   DATES
   EXPERIENCE
@@ -159,7 +159,7 @@ model Trip {
   tripGroup TripGroup? @relation(fields: [tripGroupId], references: [id])
 
   members      Member[]
-  destinations Destination[]
+  destinies Destiny[]
   activities   Activity[]
   Invitation   Invitation[]
 
@@ -204,9 +204,9 @@ model Activity {
   endTime       DateTime?
   priority      Priority      @default(Medium)
   tripId        String? // Relación opcional con un Trip
-  destinationId String? // Relación opcional con un Destination
+  destinyId String? // Relación opcional con un Destiny
   trip          Trip[]
-  destination   Destination[]
+  destiny   Destiny[]
 
   @@index([startTime, endTime]) // Índice en tiempos de inicio y fin
 }
