@@ -9,27 +9,25 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { DestinationService } from './destination.service';
-import { CreateDestinationDto } from './dto/create-destination.dto';
-import { UpdateDestinationDto } from './dto/update-destination.dto';
-import { Destination } from './entities/destination.entity';
+import { DestinyService } from './destiny.service';
+import { CreateDestinyDto } from './dto/create-destiny.dto';
+import { UpdateDestinyDto } from './dto/update-destiny.dto';
+import { Destiny } from './entities/destiny.entity';
 
 @ApiTags('Destinies')
 @Controller('destiny')
-export class DestinationController {
-  constructor(private readonly destinationService: DestinationService) {}
+export class DestinyController {
+  constructor(private readonly destinyService: DestinyService) {}
 
   @Post()
   @ApiOperation({ summary: 'Crear un nuevo destino' })
   @ApiResponse({
     status: 201,
     description: 'El destino ha sido creado exitosamente.',
-    type: Destination,
+    type: Destiny,
   })
-  async create(
-    @Body() createDestinationDto: CreateDestinationDto,
-  ): Promise<Destination> {
-    return this.destinationService.create(createDestinationDto);
+  async create(@Body() createDestinyDto: CreateDestinyDto): Promise<Destiny> {
+    return this.destinyService.create(createDestinyDto);
   }
 
   @Get()
@@ -37,10 +35,10 @@ export class DestinationController {
   @ApiResponse({
     status: 200,
     description: 'Los destinos han sido obtenidos exitosamente.',
-    type: [Destination],
+    type: [Destiny],
   })
-  async findAll(): Promise<Destination[]> {
-    return this.destinationService.findAll();
+  async findAll(): Promise<Destiny[]> {
+    return this.destinyService.findAll();
   }
 
   @Get(':id')
@@ -49,10 +47,10 @@ export class DestinationController {
   @ApiResponse({
     status: 200,
     description: 'El destino encontrado',
-    type: Destination,
+    type: Destiny,
   })
-  async findOne(@Param('id') id: string): Promise<Destination> {
-    return this.destinationService.findOne(id);
+  async findOne(@Param('id') id: string): Promise<Destiny> {
+    return this.destinyService.findOne(id);
   }
 
   @Put(':id')
@@ -61,13 +59,13 @@ export class DestinationController {
   @ApiResponse({
     status: 200,
     description: 'El destino ha sido actualizado exitosamente.',
-    type: Destination,
+    type: Destiny,
   })
   async update(
     @Param('id') id: string,
-    @Body() updateDestinationDto: UpdateDestinationDto,
-  ): Promise<Destination> {
-    return this.destinationService.update(id, updateDestinationDto);
+    @Body() updateDestinyDto: UpdateDestinyDto,
+  ): Promise<Destiny> {
+    return this.destinyService.update(id, updateDestinyDto);
   }
 
   @Delete(':id')
@@ -77,7 +75,7 @@ export class DestinationController {
     status: 200,
     description: 'El destino ha sido eliminado exitosamente.',
   })
-  async remove(@Param('id') id: string): Promise<Destination> {
-    return this.destinationService.remove(id);
+  async remove(@Param('id') id: string): Promise<Destiny> {
+    return this.destinyService.remove(id);
   }
 }

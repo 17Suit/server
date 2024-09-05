@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-export class Destination {
+export class Destiny {
   @ApiProperty({ description: 'El identificador único del destino' })
   id: string;
 

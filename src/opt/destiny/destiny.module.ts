@@ -4,15 +4,15 @@ import { LoggerMiddleware } from 'src/middleware/logger/logger.middleware';
 
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
-import { DestinationController } from './destination.controller';
-import { DestinationService } from './destination.service';
+import { DestinyController } from './destiny.controller';
+import { DestinyService } from './destiny.service';
 
 @Module({
   imports: [PrismaModule],
-  controllers: [DestinationController],
-  providers: [DestinationService],
+  controllers: [DestinyController],
+  providers: [DestinyService],
 })
-export class DestinationModule implements NestModule {
+export class DestinyModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
