@@ -7,9 +7,15 @@ import {
   Injectable,
   NestMiddleware,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Injectable()
+@ApiBearerAuth()
 export class AuthMiddleware implements NestMiddleware {
+  @ApiOperation({ summary: 'Middleware to verify JWT token' })
+  @ApiResponse({ status: 401, description: 'Not authorized' })
+  @ApiResponse({ status: 403, description: 'Invalid token' })
+  @ApiResponse({ status: 200, description: 'Authorized' })
   use(req: Request, res: Response, next: () => void) {
     const authHeader = req.headers['authorization'];
     if (!authHeader) {
