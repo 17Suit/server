@@ -1,11 +1,7 @@
 import * as bcryptjs from 'bcryptjs';
 import { UserService } from 'src/suite/user/user.service';
 
-import {
-  BadRequestException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { LoginDto } from './dto/login.dto';
@@ -17,6 +13,14 @@ export class AuthService {
     private readonly usersService: UserService,
     private readonly jwtService: JwtService,
   ) {}
+
+  async validateUser(id: string) {
+    const user = await this.usersService.findOne(id);
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+    return user;
+  }
 
   async register({ password, email, name }: RegisterDto) {
     const user = await this.usersService.findOneByEmail(email);
@@ -42,7 +46,7 @@ export class AuthService {
     const user = await this.usersService.findOneByEmail(email);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid email or password+');
+      throw new BadRequestException('Invalid email or password+');
     }
 
     const payload = {
@@ -59,7 +63,7 @@ export class AuthService {
     const isPasswordValid = await bcryptjs.compare(password, user.password);
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid email or password-');
+      throw new BadRequestException('Invalid email or password-');
     }
 
     return {
