@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import { CreateBudgetDto } from './dto/create-budget.dto';
 import { UpdateBudgetDto } from './dto/update-budget.dto';
 import { Budget } from './entities/budget.entity';
+import { Currency } from './entities/currency.entity';
 
 @Injectable()
 export class BudgetService {
@@ -36,5 +37,9 @@ export class BudgetService {
     return this.prisma.budget.delete({
       where: { id },
     });
+  }
+
+  async getCurrencies(): Promise<Currency[]> {
+    return this.prisma.currency.findMany();
   }
 }

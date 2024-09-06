@@ -13,6 +13,7 @@ import { BudgetService } from './budget.service';
 import { CreateBudgetDto } from './dto/create-budget.dto';
 import { UpdateBudgetDto } from './dto/update-budget.dto';
 import { Budget } from './entities/budget.entity';
+import { Currency } from './entities/currency.entity';
 
 @ApiTags('Budgets')
 @Controller('budget')
@@ -77,5 +78,16 @@ export class BudgetController {
   })
   async remove(@Param('id') id: number): Promise<Budget> {
     return this.budgetService.remove(id);
+  }
+
+  @Get('currencies')
+  @ApiOperation({ summary: 'Obtener todas las monedas' })
+  @ApiResponse({
+    status: 200,
+    description: 'Las monedas han sido obtenidas exitosamente.',
+    type: [Currency],
+  })
+  async getCurrencies(): Promise<Currency[]> {
+    return this.budgetService.getCurrencies();
   }
 }
