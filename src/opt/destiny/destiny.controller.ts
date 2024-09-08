@@ -3,11 +3,11 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { DestinyService } from './destiny.service';
 import { CreateDestinyDto } from './dto/create-destiny.dto';
@@ -41,41 +41,41 @@ export class DestinyController {
     return this.destinyService.findAll();
   }
 
-  @Get('?id')
+  @Get(':id')
   @ApiOperation({ summary: 'Obtener un destino por id' })
-  @ApiQuery({ name: 'id', description: 'El id del destino' })
+  @ApiParam({ name: 'id', description: 'El id del destino' })
   @ApiResponse({
     status: 200,
     description: 'El destino encontrado',
     type: Destiny,
   })
-  async findOne(@Query('id') id: string): Promise<Destiny> {
+  async findOne(@Param('id') id: string): Promise<Destiny> {
     return this.destinyService.findOne(id);
   }
 
-  @Put('?id')
+  @Put(':id')
   @ApiOperation({ summary: 'Actualizar un destino' })
-  @ApiQuery({ name: 'id', description: 'El id del destino a actualizar' })
+  @ApiParam({ name: 'id', description: 'El id del destino a actualizar' })
   @ApiResponse({
     status: 200,
     description: 'El destino ha sido actualizado exitosamente.',
     type: Destiny,
   })
   async update(
-    @Query('id') id: string,
+    @Param('id') id: string,
     @Body() updateDestinyDto: UpdateDestinyDto,
   ): Promise<Destiny> {
     return this.destinyService.update(id, updateDestinyDto);
   }
 
-  @Delete('?id')
+  @Delete(':id')
   @ApiOperation({ summary: 'Eliminar un destino' })
-  @ApiQuery({ name: 'id', description: 'El id del destino a eliminar' })
+  @ApiParam({ name: 'id', description: 'El id del destino a eliminar' })
   @ApiResponse({
     status: 200,
     description: 'El destino ha sido eliminado exitosamente.',
   })
-  async remove(@Query('id') id: string): Promise<Destiny> {
+  async remove(@Param('id') id: string): Promise<Destiny> {
     return this.destinyService.remove(id);
   }
 }

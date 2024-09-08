@@ -3,11 +3,11 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { ActivityService } from './activity.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
@@ -43,41 +43,41 @@ export class ActivityController {
     return this.activityService.findAll();
   }
 
-  @Get('?id')
+  @Get(':id')
   @ApiOperation({ summary: 'Obtener una actividad por id' })
-  @ApiQuery({ name: 'id', description: 'El id de la actividad' })
+  @ApiParam({ name: 'id', description: 'El id de la actividad' })
   @ApiResponse({
     status: 200,
     description: 'La actividad encontrada',
     type: Activity,
   })
-  async findOne(@Query('id') id: string): Promise<Activity> {
+  async findOne(@Param('id') id: string): Promise<Activity> {
     return this.activityService.findOne(id);
   }
 
-  @Put('?id')
+  @Put(':id')
   @ApiOperation({ summary: 'Actualizar una actividad' })
-  @ApiQuery({ name: 'id', description: 'El id de la actividad a actualizar' })
+  @ApiParam({ name: 'id', description: 'El id de la actividad a actualizar' })
   @ApiResponse({
     status: 200,
     description: 'La actividad ha sido actualizada exitosamente.',
     type: Activity,
   })
   async update(
-    @Query('id') id: string,
+    @Param('id') id: string,
     @Body() updateActivityDto: UpdateActivityDto,
   ): Promise<Activity> {
     return this.activityService.update(id, updateActivityDto);
   }
 
-  @Delete('?id')
+  @Delete(':id')
   @ApiOperation({ summary: 'Eliminar una actividad' })
-  @ApiQuery({ name: 'id', description: 'El id de la actividad a eliminar' })
+  @ApiParam({ name: 'id', description: 'El id de la actividad a eliminar' })
   @ApiResponse({
     status: 200,
     description: 'La actividad ha sido eliminada exitosamente.',
   })
-  async remove(@Query('id') id: string): Promise<Activity> {
+  async remove(@Param('id') id: string): Promise<Activity> {
     return this.activityService.remove(id);
   }
 }
