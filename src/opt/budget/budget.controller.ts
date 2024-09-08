@@ -3,11 +3,11 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { BudgetService } from './budget.service';
 import { CreateBudgetDto } from './dto/create-budget.dto';
@@ -42,41 +42,41 @@ export class BudgetController {
     return this.budgetService.findAll();
   }
 
-  @Get(':id')
+  @Get('?id')
   @ApiOperation({ summary: 'Obtener un presupuesto por id' })
-  @ApiParam({ name: 'id', description: 'El id del presupuesto' })
+  @ApiQuery({ name: 'id', description: 'El id del presupuesto' })
   @ApiResponse({
     status: 200,
     description: 'El presupuesto encontrado',
     type: Budget,
   })
-  async findOne(@Param('id') id: number): Promise<Budget> {
+  async findOne(@Query('id') id: number): Promise<Budget> {
     return this.budgetService.findOne(id);
   }
 
-  @Put(':id')
+  @Put('?id')
   @ApiOperation({ summary: 'Actualizar un presupuesto' })
-  @ApiParam({ name: 'id', description: 'El id del presupuesto a actualizar' })
+  @ApiQuery({ name: 'id', description: 'El id del presupuesto a actualizar' })
   @ApiResponse({
     status: 200,
     description: 'El presupuesto ha sido actualizado exitosamente.',
     type: Budget,
   })
   async update(
-    @Param('id') id: number,
+    @Query('id') id: number,
     @Body() updateBudgetDto: UpdateBudgetDto,
   ): Promise<Budget> {
     return this.budgetService.update(id, updateBudgetDto);
   }
 
-  @Delete(':id')
+  @Delete('?id')
   @ApiOperation({ summary: 'Eliminar un presupuesto' })
-  @ApiParam({ name: 'id', description: 'El id del presupuesto a eliminar' })
+  @ApiQuery({ name: 'id', description: 'El id del presupuesto a eliminar' })
   @ApiResponse({
     status: 200,
     description: 'El presupuesto ha sido eliminado exitosamente.',
   })
-  async remove(@Param('id') id: number): Promise<Budget> {
+  async remove(@Query('id') id: number): Promise<Budget> {
     return this.budgetService.remove(id);
   }
 

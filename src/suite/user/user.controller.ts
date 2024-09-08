@@ -3,9 +3,9 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -22,8 +22,8 @@ export class UserController {
     return await this.userService.findAll();
   }
 
-  @Get('/:id')
-  async findOne(@Param('id') id: string): Promise<CreateUserDto> {
+  @Get('/?id')
+  async findOne(@Query('id') id: string): Promise<CreateUserDto> {
     return await this.userService.findOne(id);
   }
 
@@ -39,13 +39,13 @@ export class UserController {
     return await this.userService.create(createUserDto);
   }
 
-  @Put('/:id')
-  async updateUser(@Param('id') id: string, @Body() user: UpdateUserDto) {
+  @Put('/?id')
+  async updateUser(@Query('id') id: string, @Body() user: UpdateUserDto) {
     return await this.userService.update(id, user);
   }
 
-  @Delete(':id')
-  async delete(@Param('id') id: string) {
+  @Delete('?id')
+  async delete(@Query('id') id: string) {
     return await this.userService.delete(id);
   }
 }

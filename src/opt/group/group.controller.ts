@@ -3,9 +3,9 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -28,18 +28,18 @@ export class GroupController {
     return this.groupService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get('?id')
+  findOne(@Query('id') id: string) {
     return this.groupService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
+  @Patch('?id')
+  update(@Query('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
     return this.groupService.update(id, updateGroupDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete('?id')
+  remove(@Query('id') id: string) {
     return this.groupService.remove(id);
   }
 }

@@ -6,9 +6,9 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
   Put,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -43,36 +43,36 @@ export class TripController {
     return this.tripService.findAll(userId);
   }
 
-  @Get(':id')
+  @Get('?id')
   @ApiOperation({ summary: 'Get a trip by ID' })
   @ApiResponse({
     status: 200,
     description: 'Return the trip with the specified ID.',
   })
   @ApiResponse({ status: 404, description: 'Trip not found.' })
-  findOne(@Param('id') id: string) {
+  findOne(@Query('id') id: string) {
     return this.tripService.findOne(id);
   }
 
-  @Put(':id')
+  @Put('?id')
   @ApiOperation({ summary: 'Update a trip by ID' })
   @ApiResponse({
     status: 200,
     description: 'The trip has been successfully updated.',
   })
   @ApiResponse({ status: 404, description: 'Plan not found.' })
-  update(@Param('id') id: string, @Body() updatePlanDto: UpdateTripDto) {
+  update(@Query('id') id: string, @Body() updatePlanDto: UpdateTripDto) {
     return this.tripService.update(id, updatePlanDto);
   }
 
-  @Delete(':id')
+  @Delete('?id')
   @ApiOperation({ summary: 'Delete a trip by ID' })
   @ApiResponse({
     status: 200,
     description: 'The trip has been successfully deleted.',
   })
   @ApiResponse({ status: 404, description: 'Plan not found.' })
-  remove(@Param('id') id: string) {
+  remove(@Query('id') id: string) {
     return this.tripService.remove(id);
   }
 }
