@@ -1,4 +1,4 @@
-import { Global, Module } from '@nestjs/common';
+import { Global, Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PrismaClient } from '@prisma/client';
 
@@ -10,7 +10,11 @@ import { PrismaClient } from '@prisma/client';
       provide: 'PRISMA_CLIENT',
       useFactory: async () => {
         const prisma = new PrismaClient();
-        await prisma.$connect();
+
+        await prisma.$connect().catch((error) => {
+          Logger.error('Failed to connect to the database', error);
+          // throw new Error(error);
+        });
         return prisma;
       },
       inject: [ConfigService],
