@@ -29,6 +29,15 @@ async function main() {
       symbol: '$',
     },
   });
+  await prisma.currency.upsert({
+    where: { name: 'MXN' },
+    update: {},
+    create: {
+      name: 'MXN',
+      symbol: '$',
+    },
+  });
+  console.log('Currencies created or updated');
 }
 
 main()
