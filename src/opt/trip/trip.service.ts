@@ -73,36 +73,9 @@ export class TripService {
       .findUnique({
         where: { id },
         include: {
-          budget: {
-            select: {
-              id: true,
-              amount: true,
-              max: true,
-              min: true,
-              currency: true,
-            },
-          },
-          destinies: {
-            select: {
-              id: true,
-              name: true,
-              description: true,
-              address: true,
-              latitude: true,
-              longitude: true,
-              city: true,
-            },
-          },
-          activities: {
-            select: {
-              id: true,
-              name: true,
-              description: true,
-              startTime: true,
-              endTime: true,
-              priority: true,
-            },
-          },
+          budget: true,
+          destinies: true,
+          activities: true,
         },
       })
       .catch((err) => {
@@ -117,9 +90,74 @@ export class TripService {
   }
 
   async update(id: string, updateTripDto: UpdateTripDto) {
-    return await this.prisma.trip.update({
+    const {
+      title,
+      description,
+      startDate,
+      endDate,
+      priority,
+      status,
+      tripType,
+      shareableLink,
+      qrCode,
+      budget,
+      budgetId,
+      destinies,
+      activities,
+      tripGroupId,
+    } = updateTripDto;
+
+    console.log(destinies);
+
+    return this.prisma.trip.update({
       where: { id },
-      data: updateTripDto,
+      data: {
+        title,
+        description,
+        startDate,
+        endDate,
+        priority,
+        status,
+        tripType,
+        shareableLink,
+        qrCode,
+        destinies: {
+          upsert:
+            destinies?.map((destiny) => ({
+              where: { placeId: destiny.placeId }, // Usa directamente placeId sin fallback
+              update: { ...destiny }, // Actualiza si existe
+              create: { ...destiny }, // Crea si no existe
+            })) || [],
+        },
+        activities: {
+          upsert:
+            activities?.map((activity) => ({
+              where: { id: activity.id }, // Usa directamente el id de la actividad
+              update: { ...activity }, // Actualiza si existe
+              create: { ...activity }, // Crea si no existe
+            })) || [],
+        },
+        budget: !budgetId
+          ? {
+              create: {
+                amount: budget.amount,
+                min: budget.min,
+                max: budget.max,
+                currency: { connect: { id: budget.currencyId } },
+                user: { connect: { id: updateTripDto.userId } },
+              },
+            }
+          : undefined,
+        tripGroup: tripGroupId
+          ? {
+              connect: { id: updateTripDto.tripGroupId },
+            }
+          : undefined,
+      },
+      include: {
+        destinies: true,
+        activities: true,
+      },
     });
   }
 
