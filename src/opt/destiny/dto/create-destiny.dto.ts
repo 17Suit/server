@@ -12,6 +12,11 @@ export class CreateDestinyDto {
   @IsString()
   description?: string;
 
+  @ApiPropertyOptional({ description: 'The Google Places ID of the destiny' })
+  @IsOptional()
+  @IsString()
+  placeId?: string;
+
   @ApiPropertyOptional({ description: 'The address of the destiny' })
   @IsOptional()
   @IsString()

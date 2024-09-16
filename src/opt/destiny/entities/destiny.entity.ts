@@ -10,6 +10,9 @@ export class Destiny {
   @ApiPropertyOptional({ description: 'Una descripción del destino' })
   description?: string;
 
+  @ApiPropertyOptional({ description: 'El identificador de Google Places' })
+  placeId: string;
+
   @ApiPropertyOptional({ description: 'La dirección del destino' })
   address?: string;
 
