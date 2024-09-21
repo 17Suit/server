@@ -150,7 +150,7 @@ model Trip {
   startDate     DateTime?
   endDate       DateTime?
   priority      TripPriority
-  status        TripStatus   @default(PLANNING)
+  status        TripStatus   @default(DRAFT)
   tripType      TripType     @default(SOLO)
   shareableLink String? // Campo para compartir enlace
   qrCode        String? // Campo opcional para almacenar el código QR
